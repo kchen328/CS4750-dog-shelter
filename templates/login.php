@@ -42,7 +42,7 @@
           </div>
           <span class="msg1"><strong><?php validate_pwd();?></strong></span>
           <div class="container-login100-form-btn">
-            <button class="login100-form-btn" type="submit" value="submit">
+            <button class="login100-form-btn" type="submit" name="Submit" value="submit">
               Login
             </button>
           </div>
@@ -77,7 +77,7 @@
 
     function validate_pwd(){
       global $db; //database
-      if( isset($_POST['username']) && (strlen($_POST['username']) == 0) ){ 
+      if(isset($_POST['username']) && (strlen($_POST['username']) == 0) ){ 
         echo "Please enter your password!";
       }
 

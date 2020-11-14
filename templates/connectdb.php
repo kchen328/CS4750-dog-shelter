@@ -30,7 +30,7 @@
 $username = 'aeb2de';
 $password = 'F4ll2020!!';
 $host = 'usersrv01.cs.virginia.edu';
-$dbname = 'aeb2de_dog_shelter';
+$dbname = 'aeb2de_kl';
 
 
 /******************************/

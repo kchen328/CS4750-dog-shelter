@@ -61,12 +61,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     <input type="text" class="form-control" name="gender" required />
   </div>
   <div class="form-group">
-    Dog shelter
+    Dog shelter:
     <input type="text" class="form-control" name="dog_shelter" required />
   </div>
   <div class="form-group">
     Current location:
     <input type="text" class="form-control" name="current_location" required />
+  </div>
+  <div class="form-group">
+    Activeness level:
+    <input type="text" class="form-control" name="activeness_level" required  />
   </div>
   <div class="form-group">
     Shots up to date:
@@ -78,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   </div>
   <div class="form-group">
     Preferred environment:
-    <input type="text" class="form-control" name="preferred_enironment" required />
+    <input type="text" class="form-control" name="preferred_environment" required />
   </div>
   <div class="form-group">
     Fee:
@@ -98,7 +102,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   </div>
      
  <input type="submit" value="Add" name="action" class="btn btn-dark" title="Insert a friend into a friends table" /> 
-<!--  <input type="submit" value="Confirm update" name="action" class="btn btn-dark" title="Confirm update a friend" /> -->
   
 </form>  
 
