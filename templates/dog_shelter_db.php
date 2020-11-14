@@ -23,7 +23,7 @@ function addDog($preferred_environment, $dog_breed, $dog_size, $color, $activene
         echo "happy dog";
         global $db;
    
-        $query = "INSERT INTO dog(preferred_environment, dog_breed, dog_size, color, activeness_level, age, name, dog_shelter, current_location,  shots_uptodate, gender, hypoallergenic, fee, ok_with_kids, ok_with_other_pets, description) VALUES(:preferred_enironment, :dog_breed, :dog_size, :color, :activeness_level, :age, :name, :dog_shelter, :current_location,  :shots_uptodate, :gender, :hypoallergenic, :fee, :ok_with_kids, :ok_with_other_pets, :descrition)";
+        $query = "INSERT INTO dog(preferred_environment, dog_breed, dog_size, color, activeness_level, age, name, dog_shelter, current_location,  shots_uptodate, gender, hypoallergenic, fee, ok_with_kids, ok_with_other_pets, description) VALUES(:preferred_environment, :dog_breed, :dog_size, :color, :activeness_level, :age, :name, :dog_shelter, :current_location,  :shots_uptodate, :gender, :hypoallergenic, :fee, :ok_with_kids, :ok_with_other_pets, :description)";
         $statement = $db->prepare($query);
         $statement->bindValue(':preferred_environment', $preferred_environment);
         $statement->bindValue(':dog_breed', $dog_breed);
