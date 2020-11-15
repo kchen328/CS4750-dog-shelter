@@ -87,9 +87,12 @@ class Dog {
 				<div class="col-sm-4 col-lg-3 col-md-3">
 				<div class="dog">
 				<input type="checkbox">
-				<img src="images/'. $row['image'] .'" alt="" class="img-responsive" >
+				<img src="images/dog.png" alt="" class="img-responsive" >
 				<p align="center"><strong><a href="#" id="info">'. $row['name'] .'</a></strong></p>
 				<h4 style="text-align:center;" class="text-danger" > $'. $row['price'] .'</h4>
+				<h5 style="text-align:center;"> Breed: '. $row['Dog_breed'] .'</h4>
+				<h5 style="text-align:center;"> Color: '. $row['color'] .'</h4>
+				<h5 style="text-align:center;"> Size: '. $row['dog_size'] .'</h4>
 				</div>
 				</div>';
 			}
