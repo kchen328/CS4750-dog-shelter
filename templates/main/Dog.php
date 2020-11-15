@@ -90,9 +90,9 @@ class Dog {
 				<img src="images/dog.png" alt="" class="img-responsive" >
 				<p align="center"><strong><a href="main/dog-profile.php?DogID='. $row['DogID'] .'" id="info">'. $row['name'] .'</a></strong></p>
 				<h4 style="text-align:center;" class="text-danger" > $'. $row['price'] .'</h4>
-				<h5 style="text-align:center;"> Breed: '. $row['Dog_breed'] .'</h4>
-				<h5 style="text-align:center;"> Color: '. $row['color'] .'</h4>
-				<h5 style="text-align:center;"> Size: '. $row['dog_size'] .'</h4>
+				<h6 style="text-align:center;"> Breed: '. $row['Dog_breed'] .'</h6>
+				<h6 style="text-align:center;"> Color: '. $row['color'] .'</h6>
+				<h6 style="text-align:center;"> Size: '. $row['dog_size'] .'</h6>
 				</div>
 				</div>';
 			}
