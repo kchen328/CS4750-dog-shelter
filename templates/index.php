@@ -1,5 +1,5 @@
 <?php 
-session_start();
+// session_start();
 include('containers/header.php');
 ?>
 <title>Dog Shelter Database</title>

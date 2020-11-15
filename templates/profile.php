@@ -8,13 +8,15 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> 
   <link rel="stylesheet" type="text/css" href="../css/main.css"> 
   <link rel="stylesheet" href="../css/style.css">
-  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/css/bootstrap-slider.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.min.js"></script>
+<script src="js/search.js"></script>
+
 </head>
   <body>
 
     <?php require('connectdb.php'); ?> 
 
-    
     <?php
       session_start();
       if (!isset($_SESSION['loggedin'])) {
@@ -46,12 +48,44 @@
           <span class="title1">Phone Number:</span> 
           <span class="title2"><?php echo $_SESSION['phone_number'];?></span>
         </div>
+        <!-- get all the dogs and be able to edit or delete them -->
 
-        <button  class="login100-form-btn" onclick="window.location.href = 'http://localhost/CS4750-dog-shelter/templates/shelter-form.php';">Edit Info</button> <br>
-      </div>
+        <button  class="login100-form-btn" style="border:2px solid black;" onclick="window.location.href = 'http://localhost/CS4750-dog-shelter/templates/shelter-form.php';">Edit Info</button> <br>
+    
+        </div>
+        <div class="card">
+            <?php
+$results = give_all_dogs();
+    function give_all_dogs(){
+        global $db;
+        $query = "SELECT DISTINCT dog.name, dog.DogID FROM dog JOIN resides JOIN dog_shelter ON dog.dog_shelter=dog_shelter.name WHERE dog_shelter.name='" . $_SESSION['name'] . "';";  
+        $statement = $db ->prepare($query);
+        $statement->execute();
+        $results = $statement->fetchAll();
+        $statement->closeCursor();
+        return $results; 
+    }
+?>
+<br>
+
+<h1>Your Dogs</h1>
+        <hr>
+            <?php foreach($results as $item): ?>
+            
+        <br>
+        <p><?php echo $item['name']; ?><p>
+        <button class="login100-form-btn" style="width:30%;border:2px solid black;" onclick="window.location.href = 'http://localhost/CS4750-dog-shelter/templates/dog_form.php';">Edit <?php echo $item['name']; ?>'s Info</button> <br>
+        
+            <form method= "POST" action="<?php $_SERVER['PHP_SELF'] ?>" >
+        <a href="delete.php?id=<?php echo($item['DogID'])?>" style="width:30%;margin-left:35%;border:2px solid black;" class=" button login100-form-btn" onclick="return confirm('Are you sure you want to completely remove this dog?');">Delete <?php echo $item['name']; ?></a>
+    </form>
+        <?php endforeach; ?>
+        <br>
+</div>
     </section>
 
   </body>
+
 </html>
 <style>
        

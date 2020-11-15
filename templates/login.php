@@ -179,7 +179,7 @@
         '</script>';
       }
       else{
-          echo "failed the session";
+          
       }
     }
   }

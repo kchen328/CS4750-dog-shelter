@@ -3,7 +3,7 @@ class Dog {
 	private $host  = 'localhost';
     private $user  = 'root';
     private $password   = "";
-    private $database  = "dog_shelter";   
+    private $database  = "dog_website";   
 	private $dogTable = 'dog';
 	private $dbConnect = false;
     public function __construct(){

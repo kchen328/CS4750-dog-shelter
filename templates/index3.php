@@ -22,7 +22,7 @@ include('containers/header.php');
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="http://localhost/CS4750-dog-shelter/templates/index2.php">Home</a></li>
+            <li class="active"><a href="http://localhost/CS4750-dog-shelter/templates/index3.php">Home</a></li>
 			<li class="active"><a href="http://localhost/CS4750-dog-shelter/templates/profile-potential.php">My Profile</a></li>
 			<li class="active"><a href="http://localhost/CS4750-dog-shelter/templates/logout.php">Signout</a></li>
           </ul>
