@@ -125,8 +125,8 @@
 
         $results = $query->fetch();
         $password_hashed = $results[2];
-          if($password_hashed == $pwd){
-              
+          // if($password_hashed == $pwd){
+            if(password_verify($pwd,$password_hashed)){
           }
         else{
           echo "Password doesn't exist!";
@@ -185,7 +185,7 @@
   }
   elseif($selectOption == 2){
     $username = trim($_POST['username']);
-    $pwd = trim($_POST['pwd']);
+    // $pwd = trim($_POST['pwd']);
     if($query = $db->prepare('SELECT * FROM potential_adopter WHERE username = :username')){
       $query->bindValue(':username', $username);
       $query->execute();
@@ -204,7 +204,7 @@
       $number_of_kids = $results[10];
       $number_of_adults= $results[11];
       $activeness_level= $results[12];
-      if(($password_hash == $pwd)){
+      if(password_verify(trim($_POST['pwd']),$password_hash)){
         session_regenerate_id();
         $_SESSION['loggedin'] = TRUE;
         $_SESSION['id'] = $id;
@@ -226,6 +226,7 @@
         '</script>';
       }
       else{
+        echo "<span class='msg'>Username and password do not match our record</span> <br/>";
       }
     }
   }
