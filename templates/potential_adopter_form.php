@@ -7,7 +7,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
         if (!empty($_POST['action']) && ($_POST['action'] == 'Add'))
         {
-             addPotentialAdopter($_POST['username'], $_POST['password'], $_POST['first_name'], $_POST['last_name'], $_POST['gender'], $_POST['age'],
+          $p=trim($_POST['password']);
+      $pwd = password_hash($p, PASSWORD_BCRYPT);
+             addPotentialAdopter($_POST['username'],  $pwd, $_POST['first_name'], $_POST['last_name'], $_POST['gender'], $_POST['age'],
                                  $_POST['location'], $_POST['email'], $_POST['living_style'], $_POST['number_of_kids'],
                                  $_POST['number_of_adults'], $_POST['activeness_level'], $_POST['max_age'],
                                  $_POST['max_price'], $_POST['hypoallergenic'], $_POST['additional_information']);

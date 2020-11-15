@@ -6,7 +6,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
         if (!empty($_POST['action']) && ($_POST['action'] == 'Add'))
 	{
-		addShelter($_POST['username'], $_POST['password'], $_POST['name'], $_POST['location'], $_POST['email'], $_POST['phone_number']); 
+    $p=trim($_POST['password']);
+    $pwd = password_hash($p, PASSWORD_BCRYPT);
+		addShelter($_POST['username'], $pwd, $_POST['name'], $_POST['location'], $_POST['email'], $_POST['phone_number']); 
 	}
 }
 ?>

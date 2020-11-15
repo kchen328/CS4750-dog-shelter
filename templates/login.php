@@ -110,7 +110,7 @@
 
           $results = $query->fetch();
           $password_hashed = $results[2];
-            if($password_hashed == $pwd){
+            if(password_verify($pwd,$password_hashed)){
                 
             }
           else{
@@ -136,7 +136,7 @@
     }
     }
 ?>
-<script type="text/javascript">
+<script>
   function redirect(){ //for dog shelter
     // window.location.href = 'http://localhost/CS4750-dog-shelter/templates/profile.php';
     window.location.href = 'http://localhost/CS4750-dog-shelter/templates/index2.php';
@@ -164,7 +164,7 @@
       $location = $results[4];
       $email = $results[5];
       $phone_number = $results[6];
-      if(($password_hash == $pwd)){
+      if(password_verify(trim($_POST['pwd']),$password_hash)){
         session_regenerate_id(); // replaces current session ID with new one
         $_SESSION['loggedin'] = TRUE;
         $_SESSION['id'] = $id;
@@ -174,7 +174,7 @@
         $_SESSION['name'] = $name;
         $_SESSION['location'] = $location;
         $_SESSION['phone_number'] = $phone_number;
-        echo '<script type="text/javascript">',
+        echo '<script>',
         'redirect();',
         '</script>';
       }
