@@ -1,9 +1,9 @@
 <?php
 class Dog {
-	private $host  = 'localhost';
-    private $user  = 'root';
-    private $password   = "";
-    private $database  = "dog_shelter";   
+	private $host  = 'localhost:3306';
+    private $user  = 'kk6ev';
+    private $password   = "F4ll2020!!";
+    private $database  = "dog_website";   
 	private $dogTable = 'dog';
 	private $dbConnect = false;
     public function __construct(){
@@ -88,7 +88,7 @@ class Dog {
 				<div class="dog">
 				<input type="checkbox">
 				<img src="images/dog.png" alt="" class="img-responsive" >
-				<p align="center"><strong><a href="#" id="info">'. $row['name'] .'</a></strong></p>
+				<p align="center"><strong><a href="main/dog-profile.php?DogID='. $row['DogID'] .'" id="info">'. $row['name'] .'</a></strong></p>
 				<h4 style="text-align:center;" class="text-danger" > $'. $row['price'] .'</h4>
 				<h5 style="text-align:center;"> Breed: '. $row['Dog_breed'] .'</h4>
 				<h5 style="text-align:center;"> Color: '. $row['color'] .'</h4>
