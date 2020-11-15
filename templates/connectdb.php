@@ -37,7 +37,7 @@ $dbname = 'aeb2de_kl';
 
 $dsn = "mysql:host=$host;dbname=$dbname";
 $db = "";
-
+$db = new PDO($dsn, $username, $password); 
 /** connect to the database **/
 try 
 {

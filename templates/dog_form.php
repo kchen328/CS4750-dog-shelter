@@ -34,71 +34,70 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
 <h1>Friend book</h1>
 
-<!-- <form action="formprocessing.php" method="post">  -->
-<form name="mainForm" action="dog_form.php" method="post">
+<form name="mainForm" action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
   <div class="form-group">
     Name:
-    <input type="text" class="form-control" name="name" required />        
+    <input type="text" class="form-control" name="name"   />        
   </div>  
   <div class="form-group">
     Breed:
-    <input type="text" class="form-control" name="dog_breed" required /> 
+    <input type="text" class="form-control" name="dog_breed"   /> 
   </div>  
   <div class="form-group">
     Size:
-    <input type="text" class="form-control" name="dog_size" required />        
+    <input type="text" class="form-control" name="dog_size"   />        
   </div> 
   <div class="form-group">
     Color:
-    <input type="text" class="form-control" name="color" required />
+    <input type="text" class="form-control" name="color"   />
   </div>
   <div class="form-group">
     Age:
-    <input type="number" class="form-control" name="age" required max="25" min="0" />
+    <input type="number" class="form-control" name="age"   max="25" min="0" />
   </div>
 <div class="form-group">
     Gender:
-    <input type="text" class="form-control" name="gender" required />
+    <input type="text" class="form-control" name="gender"   />
   </div>
   <div class="form-group">
     Dog shelter:
-    <input type="text" class="form-control" name="dog_shelter" required />
+    <input type="text" class="form-control" name="dog_shelter"   />
   </div>
   <div class="form-group">
     Current location:
-    <input type="text" class="form-control" name="current_location" required />
+    <input type="text" class="form-control" name="current_location"   />
   </div>
   <div class="form-group">
     Activeness level:
-    <input type="text" class="form-control" name="activeness_level" required  />
+    <input type="text" class="form-control" name="activeness_level"    />
   </div>
   <div class="form-group">
     Shots up to date:
-    <input type="number" class="form-control" name="shots_uptodate" required max="1" min="0" />
+    <input type="number" class="form-control" name="shots_uptodate"   max="1" min="0" />
   </div>
 <div class="form-group">
    Hypoallergenic:
-    <input type="number" class="form-control" name="hypoallergenic" required required max="1" min="0"/>
+    <input type="number" class="form-control" name="hypoallergenic"     max="1" min="0"/>
   </div>
   <div class="form-group">
     Preferred environment:
-    <input type="text" class="form-control" name="preferred_environment" required />
+    <input type="text" class="form-control" name="preferred_environment"   />
   </div>
   <div class="form-group">
     Fee:
-    <input type="number" class="form-control" name="fee" required max="10000" min="0" />
+    <input type="number" class="form-control" name="fee"   max="10000" min="0" />
   </div>
    <div class="form-group">
    OK with kids:
-    <input type="number" class="form-control" name="ok_with_kids" required max="1" min="0"/>
+    <input type="number" class="form-control" name="ok_with_kids"   max="1" min="0"/>
   </div>
   <div class="form-group">
    OK with other pets:
-    <input type="number" class="form-control" name="ok_with_other_pets" required required max="1" min="0"/>
+    <input type="number" class="form-control" name="ok_with_other_pets"     max="1" min="0"/>
   </div>
   <div class="form-group">
    Description
-    <input type="text" class="form-control" name="description" required />
+    <input type="text" class="form-control" name="description"   />
   </div>
      
  <input type="submit" value="Add" name="action" class="btn btn-dark" title="Insert a friend into a friends table" /> 

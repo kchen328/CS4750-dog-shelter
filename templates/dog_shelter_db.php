@@ -16,14 +16,13 @@
 //                and replaces it with the actual value from $name.
 //                Thus, be sure to match the name; a mismatch is ignored.
 //      execute() actually executes the SQL statement
-
+require('connectdb.php');
 
 function addDog($preferred_environment, $dog_breed, $dog_size, $color, $activeness_level, $age, $name, $dog_shelter, $current_location, $shots_uptodate, $gender, $hypoallergenic, $fee, $ok_with_kids, $ok_with_other_pets, $description) 
 {
         echo "happy dog";
         global $db;
-   
-        $query = "INSERT INTO dog(preferred_environment, dog_breed, dog_size, color, activeness_level, age, name, dog_shelter, current_location,  shots_uptodate, gender, hypoallergenic, fee, ok_with_kids, ok_with_other_pets, description) VALUES(:preferred_environment, :dog_breed, :dog_size, :color, :activeness_level, :age, :name, :dog_shelter, :current_location,  :shots_uptodate, :gender, :hypoallergenic, :fee, :ok_with_kids, :ok_with_other_pets, :description)";
+        $query = "INSERT INTO dog (  preferred_environment  ,   dog_breed  ,   dog_size  ,   color  ,   activeness_level  ,   age  ,   name  ,   dog_shelter  ,   current_location  ,    shots_uptodate  ,   gender  ,   hypoallergenic  ,   fee  ,   ok_with_kids  ,   ok_with_other_pets  ,   description  ) VALUES(:preferred_environment, :dog_breed, :dog_size, :color, :activeness_level, :age, :name, :dog_shelter, :current_location,  :shots_uptodate, :gender, :hypoallergenic, :fee, :ok_with_kids, :ok_with_other_pets, :description)";
         $statement = $db->prepare($query);
         $statement->bindValue(':preferred_environment', $preferred_environment);
         $statement->bindValue(':dog_breed', $dog_breed);
@@ -48,7 +47,7 @@ function addDog($preferred_environment, $dog_breed, $dog_size, $color, $activene
  
 function addPotentialAdopter($first_name, $last_name, $gender, $age, $location, $email, $living_style, $number_of_kids, $number_of_adults, $activeness_level, $max_age, $max_price, $hypoallergenic, $additional_information)
 {
- 	global $db;
+        global $db;
         $query = "INSERT INTO potential_adopter(first_name, last_name, gender, age, location, email, living_style, number_of_kids, number_of_adults, activeness_level, max_age, max_price, hypoallergenic, additional_information) VALUES(:first_name, :last_name, :gender, :age, :location, :email, :living_style, :number_of_kids, :number_of_adults, :activeness_level, :max_age, :max_price, :hypoallergenic, :additional_information)";
         $statement = $db->prepare($query);
         $statement->bindValue(':first_name', $first_name);
@@ -68,4 +67,15 @@ function addPotentialAdopter($first_name, $last_name, $gender, $age, $location, 
         $statement->closeCursor();
 
 }
+
+function showAll(){
+       global $db;
+       $query = "SELECT * FROM dog";
+       $statement = $db->prepare($query);
+       $statement->execute();
+       $results = $statement->fetchAll();
+       $statement->closecursor();
+        return $results;
+}
+// showAll();
 ?>
