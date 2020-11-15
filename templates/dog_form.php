@@ -109,7 +109,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 <?php
 function addDog($preferred_environment, $dog_breed, $dog_size, $color, $activeness_level, $age, $name, $dog_shelter, $current_location, $shots_uptodate, $gender, $hypoallergenic, $fee, $ok_with_kids, $ok_with_other_pets, $description) 
 {
-        echo "happy dog";
         global $db;
         $query = "INSERT INTO dog(preferred_environment, dog_breed,   dog_size  ,   color  ,   activeness_level  ,   age  ,   name  ,   dog_shelter  ,   current_location  ,    shots_uptodate  ,   gender  ,   hypoallergenic  ,   fee  ,   ok_with_kids  ,   ok_with_other_pets  ,   description  ) VALUES(:preferred_environment, :dog_breed, :dog_size, :color, :activeness_level, :age, :name, :dog_shelter, :current_location,  :shots_uptodate, :gender, :hypoallergenic, :fee, :ok_with_kids, :ok_with_other_pets, :description)";
         $statement = $db->prepare($query);
@@ -130,7 +129,6 @@ function addDog($preferred_environment, $dog_breed, $dog_size, $color, $activene
         $statement->bindValue(':ok_with_other_pets', $ok_with_other_pets);
         $statement->bindValue(':description', $description);
         $statement->execute();
-        echo "executed";
         $statement->closeCursor();
 }
 

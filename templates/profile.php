@@ -4,12 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="/js/index.js"></script>
-
   <title>Dog_Who</title>
-
-  <link rel="stylesheet" type="text/css" href="/css/homepage-after-login.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> 
 
 </head>
@@ -108,7 +103,7 @@
           <span class="title2"><?php echo $_SESSION['phone_number'];?></span>
         </div>
 
-        <!-- <button onclick="window.location.href = 'http://localhost/CS4640-ztm4qv-kk6ev-project/templates/edit-user-info.php';">Edit Info</button> <br> -->
+        <button onclick="window.location.href = 'http://localhost/CS4750-dog-shelter/templates/edit-shelter-info.php';">Edit Info</button> <br>
       </div>
     </section>
 
