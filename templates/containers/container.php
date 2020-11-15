@@ -21,7 +21,7 @@
         </div><!--/.nav-collapse -->
       </div>
     </div>
-	
-	<div class="container" style="min-height:500px;">
-	<div class=''>
-	</div>
+  
+  <div class="container" style="min-height:500px;">
+  <div class=''>
+  </div>
