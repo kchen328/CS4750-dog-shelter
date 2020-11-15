@@ -57,15 +57,14 @@
 <?php
     function validate_username(){
       global $db;
-      // $selectOption = $_POST['type2'];
-      // echo ($selectOption);
+      // $selectOption = $_POST['taskOption'];
       if( isset($_POST['username']) && (strlen($_POST['username']) == 0) ){ 
         echo "Please enter your username!";
       }
       elseif( isset($_POST['username']) && (strlen($_POST['username']) != 0) ){
         $username = trim($_POST['username']);
         //dog_shelter
-        if($selectOption = 'Dog Shelter'){
+        if($_POST['taskOption'] == 1){
         if($query = $db->prepare('SELECT DogShelterID, password FROM dog_shelter WHERE username = :username')){
           $query->bindValue(':username', $username);
           $query->execute();
@@ -79,7 +78,7 @@
           }
         }
         }
-        if($_POST['type'] = 'Potential Adopter'){
+        if($_POST['taskOption'] == 2){
           if($query = $db->prepare('SELECT AdopterID, password FROM potential_adopter WHERE username = :username')){
             $query->bindValue(':username', $username);
             $query->execute();
@@ -104,7 +103,7 @@
       elseif(isset($_POST['username'])){
         $username = trim($_POST['username']);
         $pwd = trim($_POST['pwd']);
-        if($_POST['type'] = 'Dog Shelter'){
+        if($_POST['taskOption'] == 1){
         if( (isset($_POST['username'])) && ($query = $db->prepare('SELECT * FROM dog_shelter WHERE username = :username')) ){
           $query->bindValue(':username', $username);
           $query->execute();
@@ -119,7 +118,7 @@
           }
         }
       }
-      if($_POST['type'] = 'Potential Adopter'){
+      if($_POST['taskOption'] == 2){
       if( (isset($_POST['username'])) && ($query = $db->prepare('SELECT * FROM potential_adopter WHERE username = :username')) ){
         $query->bindValue(':username', $username);
         $query->execute();
@@ -138,19 +137,19 @@
     }
 ?>
 <script type="text/javascript">
-  function redirect(){
-    window.location.href = 'http://localhost/CS4750-dog-shelter/templates/profile.php';
+  function redirect(){ //for dog shelter
+    // window.location.href = 'http://localhost/CS4750-dog-shelter/templates/profile.php';
+    window.location.href = 'http://localhost/CS4750-dog-shelter/templates/index2.php';
   }
-  function redirect2(){
-    window.location.href = 'http://localhost/CS4750-dog-shelter/templates/profile-potential.php';
+  function redirect_potent(){ //for potential adopter
+    window.location.href = 'http://localhost/CS4750-dog-shelter/templates/index3.php';
   }
 </script>
 <?php
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $selectOption = $_POST['taskOption'];
-
-    if($selectOption = 'Dog_Shelter'){
-      echo $selectOption;
+    if($selectOption == 1){
+      // echo "selected dog shelter";
     $username = trim($_POST['username']);
     $pwd = trim($_POST['pwd']);
     if($query = $db->prepare('SELECT * FROM dog_shelter WHERE username = :username')){
@@ -166,7 +165,7 @@
       $email = $results[5];
       $phone_number = $results[6];
       if(($password_hash == $pwd)){
-        session_regenerate_id();
+        session_regenerate_id(); // replaces current session ID with new one
         $_SESSION['loggedin'] = TRUE;
         $_SESSION['id'] = $id;
         $_SESSION['email'] = $email;
@@ -184,10 +183,8 @@
       }
     }
   }
-  elseif($selectOption = 'Potential_Adopter'){
+  elseif($selectOption == 2){
     $username = trim($_POST['username']);
-    echo $selectOption;
-    echo "help";
     $pwd = trim($_POST['pwd']);
     if($query = $db->prepare('SELECT * FROM potential_adopter WHERE username = :username')){
       $query->bindValue(':username', $username);
@@ -203,10 +200,10 @@
       $age = $results[6];
       $location = $results[7];
       $email = $results[8];
-      $phone_number = $results[9];
-      $living_style = $results[10];
-      $number_of_kids= $results[11];
-      $number_of_adults= $results[12];
+      $living_style = $results[9];
+      $number_of_kids = $results[10];
+      $number_of_adults= $results[11];
+      $activeness_level= $results[12];
       if(($password_hash == $pwd)){
         session_regenerate_id();
         $_SESSION['loggedin'] = TRUE;
@@ -217,20 +214,18 @@
         $_SESSION['pwd_hashed'] = $password_hash;
         $_SESSION['first_name'] = $fname;
         $_SESSION['last_name'] = $lname;
-        $_SESSION['gender'] = $lname;
-        $_SESSION['age'] = $lname;
+        $_SESSION['gender'] = $gender;
+        $_SESSION['age'] = $age;
         $_SESSION['location'] = $location;
-        $_SESSION['phone_number'] = $phone_number;
         $_SESSION['living_style'] = $living_style;
         $_SESSION['number_of_kids'] = $number_of_kids;
         $_SESSION['number_of_adults'] = $number_of_adults;
-  
-        echo '<script type="text/javascript">',
-        'redirect2();',
+        $_SESSION['activeness_level'] = $activeness_level;
+        echo '<script>',
+        'redirect_potent();',
         '</script>';
       }
       else{
-          echo "failed the session";
       }
     }
   }

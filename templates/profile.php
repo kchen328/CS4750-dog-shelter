@@ -7,6 +7,8 @@
   <title>Dog_Who</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> 
   <link rel="stylesheet" type="text/css" href="../css/main.css"> 
+  <link rel="stylesheet" href="../css/style.css">
+  
 </head>
   <body>
 
@@ -20,8 +22,38 @@
         exit;
       } 
     ?>
-        
-    <style>
+    <section>
+      <div class="card">
+        <h1>Welcome to your dog shelter's profile!</h1>
+        <hr>
+
+        <div class="oneline" style="padding-top:15px;"> 
+          <span class="title1">Name:</span> 
+          <span class="title2"><?php echo $_SESSION['name'];?></span>
+        </div>
+
+        <div class="oneline"> 
+          <span class="title1">Location: </span> 
+          <span class="title2"><?php echo $_SESSION['location'];?></span>
+        </div>
+
+        <div class="oneline"> 
+          <span class="title1">Email:</span> 
+          <span class="title2"><?php echo $_SESSION['email'];?></span>
+        </div>
+
+        <div class="oneline" style="padding-bottom:15px;"> 
+          <span class="title1">Phone Number:</span> 
+          <span class="title2"><?php echo $_SESSION['phone_number'];?></span>
+        </div>
+
+        <button  class="login100-form-btn" onclick="window.location.href = 'http://localhost/CS4750-dog-shelter/templates/shelter-form.php';">Edit Info</button> <br>
+      </div>
+    </section>
+
+  </body>
+</html>
+<style>
        
       .card {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -79,36 +111,3 @@
       }
       }
     </style>
-
-
-    <section>
-      <div class="card">
-        <h1>Welcome to your dog shelter's profile!</h1>
-        <hr>
-
-        <div class="oneline" style="padding-top:15px;"> 
-          <span class="title1">Name:</span> 
-          <span class="title2"><?php echo $_SESSION['name'];?></span>
-        </div>
-
-        <div class="oneline"> 
-          <span class="title1">Location: </span> 
-          <span class="title2"><?php echo $_SESSION['location'];?></span>
-        </div>
-
-        <div class="oneline"> 
-          <span class="title1">Email:</span> 
-          <span class="title2"><?php echo $_SESSION['email'];?></span>
-        </div>
-
-        <div class="oneline" style="padding-bottom:15px;"> 
-          <span class="title1">Phone Number:</span> 
-          <span class="title2"><?php echo $_SESSION['phone_number'];?></span>
-        </div>
-
-        <button  class="login100-form-btn" onclick="window.location.href = 'http://localhost/CS4750-dog-shelter/templates/shelter-form.php';">Edit Info</button> <br>
-      </div>
-    </section>
-
-  </body>
-</html>

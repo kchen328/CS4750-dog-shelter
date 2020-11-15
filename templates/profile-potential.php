@@ -88,7 +88,26 @@
 
         <div class="oneline" style="padding-top:15px;"> 
           <span class="title1">First Name:</span> 
-          <span class="title2"><?php echo $_SESSION['name'];?></span>
+          <span class="title2"><?php echo $_SESSION['first_name'];?></span>
+        </div>
+        <div class="oneline"> 
+          <span class="title1">Last Name:</span> 
+          <span class="title2"><?php echo $_SESSION['last_name'];?></span>
+        </div>
+
+        <div class="oneline"> 
+          <span class="title1">Username: </span> 
+          <span class="title2"><?php echo $_SESSION['username'];?></span>
+        </div>
+
+        <div class="oneline"> 
+          <span class="title1">Gender: </span> 
+          <span class="title2"><?php echo $_SESSION['gender'];?></span>
+        </div>
+
+        <div class="oneline"> 
+          <span class="title1">Age: </span> 
+          <span class="title2"><?php echo $_SESSION['age'];?></span>
         </div>
 
         <div class="oneline"> 
@@ -101,10 +120,24 @@
           <span class="title2"><?php echo $_SESSION['email'];?></span>
         </div>
 
-        <div class="oneline" style="padding-bottom:15px;"> 
-          <span class="title1">Phone Number:</span> 
-          <span class="title2"><?php echo $_SESSION['phone_number'];?></span>
+        <div class="oneline"> 
+          <span class="title1">Desired Activeness Level:</span> 
+          <span class="title2"><?php echo $_SESSION['activeness_level'];?></span>
         </div>
+
+        <div class="oneline"> 
+          <span class="title1">Living Style: </span> 
+          <span class="title2"><?php echo $_SESSION['living_style'];?></span>
+        </div>
+        <div class="oneline"> 
+          <span class="title1">Number of kids in your household: </span> 
+          <span class="title2"><?php echo $_SESSION['number_of_kids'];?></span>
+        </div>
+        <div class="oneline"> 
+          <span class="title1">Number of adults: </span> 
+          <span class="title2"><?php echo $_SESSION['number_of_adults'];?></span>
+        </div>
+
 
         <button  class="login100-form-btn" onclick="window.location.href = 'http://localhost/CS4750-dog-shelter/templates/potential_adopter_form.php';">Edit Info</button> <br>
       </div>

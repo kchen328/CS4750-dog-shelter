@@ -13,7 +13,8 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li class="active"><a href="http://localhost/CS4750-dog-shelter/templates/index.php">Home</a></li>
+            <li class="active"><a href="http://localhost/CS4750-dog-shelter/templates/login.php">Login</a></li>
            
           </ul>
          

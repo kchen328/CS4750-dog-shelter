@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 <body>
 <div class="container">
 
-<h1>Friend book</h1>
+<h1>Add a Dog</h1>
 
 <form name="mainForm" action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
   <div class="form-group">

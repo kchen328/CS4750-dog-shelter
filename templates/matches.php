@@ -8,18 +8,25 @@
   <link rel="stylesheet" type="text/css" href="../css/main.css">  
 <?php require('connectdb.php'); ?> 
 </head>
-
+<?php
+      session_start();
+      if (!isset($_SESSION['loggedin'])) {
+        header('Location: http://localhost/CS4750-dog-shelter/templates/login.php');
+        exit;
+      } 
+    ?>
 <?php
  $results = match_potentialadopter_dog();
     function match_potentialadopter_dog(){
+        // $sheltername = $_SESSION['name'];
         echo "List of interested potential adopters for each dog in the shelter:  ";
         global $db;
-        $query = "SELECT  potential_adopter.first_name, potential_adopter.last_name, dog.name, potential_adopter.email FROM potential_adopter JOIN interested_in ON potential_adopter.AdopterID = interested_in.AdopterID JOIN dog ON dog.DogID = interested_in.DogID;";  
+        $query = "SELECT potential_adopter.first_name, potential_adopter.last_name, dog.name, potential_adopter.email FROM potential_adopter JOIN interested_in ON potential_adopter.AdopterID = interested_in.AdopterID JOIN dog ON dog.DogID = interested_in.DogID AND dog.dog_shelter='" . $_SESSION['name'] . "';";  
         $statement = $db ->prepare($query);
         $statement->execute();
         $results = $statement->fetchAll();
         $statement->closeCursor();
-        return $results; //********** dog shelter name
+        return $results; 
     }
 ?>
 
