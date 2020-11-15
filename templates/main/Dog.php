@@ -4,7 +4,7 @@ class Dog {
     private $user  = 'root';
     private $password   = "";
     private $database  = "dog_shelter";   
-	private $dogTable = 'product_details';
+	private $dogTable = 'dog';
 	private $dbConnect = false;
     public function __construct(){
         if(!$this->dbConnect){ 
@@ -39,7 +39,7 @@ class Dog {
 		$sqlQuery = "
 			SELECT DISTINCT(Dog_breed)
 			FROM ".$this->dogTable." 
-			ORDER BY Dog_breed DESC";
+			ORDER BY Dog_breed ASC";
         return  $this->getData($sqlQuery);
 	}
 	public function getSize(){
@@ -86,12 +86,13 @@ class Dog {
 				$searchResultHTML .= '
 				<div class="col-sm-4 col-lg-3 col-md-3">
 				<div class="dog">
-				<img src="images/'. $row['image'] .'" alt="" class="img-responsive" >
-				<p align="center"><strong><a href="#">'. $row['name'] .'</a></strong></p>
-				<h4 style="text-align:center;" class="text-danger" >'. $row['price'] .'</h4>
-				Breed : '. $row['Dog_breed'] .' <br />
-				Color : '. $row['color'] .' <br />
-				Size : '. $row['dog_size'] .' </p>
+				<input type="checkbox">
+				<img src="images/dog.png" alt="" class="img-responsive" >
+				<p align="center"><strong><a href="#" id="info">'. $row['name'] .'</a></strong></p>
+				<h4 style="text-align:center;" class="text-danger" > $'. $row['price'] .'</h4>
+				<h5 style="text-align:center;"> Breed: '. $row['Dog_breed'] .'</h4>
+				<h5 style="text-align:center;"> Color: '. $row['color'] .'</h4>
+				<h5 style="text-align:center;"> Size: '. $row['dog_size'] .'</h4>
 				</div>
 				</div>';
 			}

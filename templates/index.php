@@ -6,7 +6,7 @@ include('containers/header.php');
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/css/bootstrap-slider.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.min.js"></script>
 <script src="js/search.js"></script>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="../css/style.css">
 <?php include('containers/container.php');?>
 <div class="container">		
 	<h2>Available Dogs</h2>
@@ -72,9 +72,4 @@ include('containers/header.php');
 	</div>
     </div>	
 </div>	
-
-
-
-
-
-
+<?php include('containers/footer.php');?>

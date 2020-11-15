@@ -1,6 +1,6 @@
 </head>
 <body class="">
-<div role="navigation" class="navbar navbar-default navbar-static-top">
+<div role="navigation" class="navbar navbar-default navbar-static-top color">
       <div class="container">
         <div class="navbar-header">
           <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
@@ -13,14 +13,15 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li class="active"><a href="http://localhost/CS4750-dog-shelter/templates/index.php">Home</a></li>
+            <li class="active"><a href="http://localhost/CS4750-dog-shelter/templates/login.php">Login</a></li>
            
           </ul>
          
         </div><!--/.nav-collapse -->
       </div>
     </div>
-	
-	<div class="container" style="min-height:500px;">
-	<div class=''>
-	</div>
+  
+  <div class="container" style="min-height:500px;">
+  <div class=''>
+  </div>
