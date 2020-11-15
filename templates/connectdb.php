@@ -18,20 +18,25 @@
 /******************************/
 // connecting to DB on XAMPP (local)
 
-$username = 'kk6ev';
-$password = 'F4ll2020!!';
-$host = 'localhost:3306';
-$dbname = 'dog_website';
+
+//$username = 'kk6ev';
+//$password = 'F4ll2020!!';
+//$host = 'localhost:3306';
+//$dbname = 'dog_website';
 
 
 /******************************/
 // connecting to DB on CS server
-
-// $username = 'aeb2de';
-// $password = 'F4ll2020!!';
-// $host = 'usersrv01.cs.virginia.edu';
-// $dbname = 'aeb2de_kl';
-
+/*
+ $username = 'aeb2de';
+ $password = 'F4ll2020!!';
+ $host = 'usersrv01.cs.virginia.edu';
+ $dbname = 'aeb2de_kl';
+*/
+$username = 'root';
+$password = '';
+$host = 'localhost:3306';
+$dbname = 'dogwebsite';
 
 /******************************/
 

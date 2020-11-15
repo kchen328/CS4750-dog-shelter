@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,8 +45,5 @@
     </tr>
  <?php endforeach; ?>
 </body>
-
-
-
 
 </html>

@@ -1,9 +1,16 @@
 <?php
 class Dog {
+	/*
 	private $host  = 'localhost:3306';
     private $user  = 'kk6ev';
     private $password   = "F4ll2020!!";
-    private $database  = "dog_website";   
+	private $database  = "dog_website";   
+	*/
+	private $user = 'root';
+    private $password = '';
+    private $host = 'localhost:3306';
+	private $database = 'dogwebsite';
+	
 	private $dogTable = 'dog';
 	private $dbConnect = false;
     public function __construct(){
@@ -56,6 +63,13 @@ class Dog {
 			ORDER BY color ASC";
         return  $this->getData($sqlQuery);
 	}
+
+	public function interestedCheck($cb, $AdopterID, $DogID){
+		if($cb.is(':checked')){
+			return addInterestMatch($AdopterID, $DogID);
+		}
+	}
+
 	public function searchDogs(){
 		$sqlQuery = "SELECT * FROM ".$this->dogTable." WHERE price > 0";
 		if(isset($_POST["minPrice"], $_POST["maxPrice"]) && !empty($_POST["minPrice"]) && !empty($_POST["maxPrice"])){
@@ -86,7 +100,7 @@ class Dog {
 				$searchResultHTML .= '
 				<div class="col-sm-4 col-lg-3 col-md-3">
 				<div class="dog">
-				<input type="checkbox">
+				<input type="checkbox" onclick="interestedCheck(this, '. $row['AdopterID'] .', '. $row['DogID'] .');" />		
 				<img src="images/dog.png" alt="" class="img-responsive" >
 				<p align="center"><strong><a href="main/dog-profile.php?DogID='. $row['DogID'] .'" id="info">'. $row['name'] .'</a></strong></p>
 				<h4 style="text-align:center;" class="text-danger" > $'. $row['price'] .'</h4>

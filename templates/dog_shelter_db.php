@@ -68,6 +68,18 @@ function addPotentialAdopter($first_name, $last_name, $gender, $age, $location, 
 
 }
 
+function addInterestMatch($AdopterID, $DogID) 
+{
+        echo "I'm interested!";
+        global $db;
+        $query = "INSERT INTO interested_in(AdopterID, DogID) VALUES(:AdopterID, :DogID)";
+        $statement = $db->prepare($query);
+        $statement->bindParam(':AdopterID', $AdopterID);
+        $statement->bindValue(':DogID', $DogID);
+        $statement->execute();
+        $statement->closeCursor();
+}
+
 function showAll(){
        global $db;
        $query = "SELECT * FROM dog";
