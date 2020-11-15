@@ -1,0 +1,12 @@
+.dog {
+	border:1px solid #ccc; 
+	border-radius:5px; 
+	padding:16px; 
+	margin-bottom:16px; 
+	height:250px;
+}
+.breedSection{
+	height: 180px; 
+	overflow-y: auto; 
+	overflow-x: hidden;
+}
