@@ -1,16 +1,13 @@
-<?php
+ <?php
 require('connectdb.php');
-require('dog_shelter_db.php');
+// require('dog_shelter_db.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
         if (!empty($_POST['action']) && ($_POST['action'] == 'Add'))
 	{
-             addPotentialAdopter($_POST['first_name'], $_POST['last_name'], $_POST['gender'], $_POST['age'], 
-                                 $_POST['location'], $_POST['email'], $_POST['living_style'], $_POST['number_of_kids'], 
-                                 $_POST['number_of_adults'], $_POST['activeness_level'], $_POST['max_age'], 
-                                 $_POST['max_price'], $_POST['hypoallergenic'], $_POST['additional_information']);
-	} 
+		addShelter($_POST['username'], $_POST['password'], $_POST['name'], $_POST['location'], $_POST['email'], $_POST['phone_number']); 
+	}
 }
 ?>
 
@@ -30,75 +27,59 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 <body>
 <div class="container">
 
-<h1>Friend book</h1>
+<h1>Create Shelter Account</h1>
 
-<!-- <form action="formprocessing.php" method="post">  -->
-<form name="mainForm" action="potential_adopter_form.php" method="post">
-  <div class="form-group">
-    First name:
-    <input type="text" class="form-control" name="first_name" required />        
-  </div>  
-  <div class="form-group">
-    Last Name:
-    <input type="text" class="form-control" name="last_name" required /> 
-  </div>  
-  <div class="form-group">
-    Gender:
-    <input type="text" class="form-control" name="gender" required />        
+<form name="mainForm" action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+   <div class="form-group">
+    Username:
+    <input type="text" class="form-control" name="username"   />        
+  </div> 
+<div class="form-group">
+    Password:
+    <input type="text" class="form-control" name="password"   />        
   </div> 
   <div class="form-group">
-    Age:
-    <input type="number" class="form-control" name="age" required max="125" min="18"/>
-  </div>
+    Name:
+    <input type="text" class="form-control" name="name"   />        
+  </div>  
   <div class="form-group">
     Location:
-    <input type="text" class="form-control" name="location" required/>
-  </div>
-<div class="form-group">
-    Email:
-    <input type="text" class="form-control" name="email" required />
-  </div>
+    <input type="text" class="form-control" name="location"   /> 
+  </div>  
   <div class="form-group">
-   Living style: 
-    <input type="text" class="form-control" name="living_style" required />
-  </div>
+    Phone number:
+    <input type="text" class="form-control" name="phone_number"   />        
+  </div> 
   <div class="form-group">
-    Number of kids:
-    <input type="number" class="form-control" name="number_of_kids" required max="50" min="0"/>
-  </div>
-  <div class="form-group">
-    Number of adults:
-    <input type="number" class="form-control" name="number_of_adults" required max="50" min="0" />
-  </div>
-<div class="form-group">
-   Hypoallergenic:
-    <input type="number" class="form-control" name="activeness_level" required max="1" min="0"/>
-  </div>
-  <div class="form-group">
-    Max age:
-    <input type="number" class="form-control" name="max_age" required max="25" min="0"/>
-  </div>
-  <div class="form-group">
-    Max price:
-    <input type="number" class="form-control" name="max price" required max="10000" min="0" />
-  </div>
-   <div class="form-group">
-   Hypoallergenic:
-    <input type="number" class="form-control" name="hypoallergenic" required max="1" min="0"/>
-  </div>
-  <div class="form-group">
-   Additional information:
-    <input type="text" class="form-control" name="additional_information" required />
+    Email 
+    <input type="text" class="form-control" name="email"   />
   </div>
      
  <input type="submit" value="Add" name="action" class="btn btn-dark" title="Insert a friend into a friends table" /> 
-<!--  <input type="submit" value="Confirm update" name="action" class="btn btn-dark" title="Confirm update a friend" /> -->
   
 </form>  
 
   
 </div>    
+<?php
+function addShelter($username, $password, $name, $location, $email, $phone_number)
+{
+        global $db;
+        $query = "INSERT INTO dog_shelter(username, password, name, location, email, phone_number) VALUES(:username, :password, :name, :location, :email, :phone_number)";
+        $statement = $db->prepare($query);
+        $statement->bindParam(':name', $name);
+        $statement->bindValue(':location', $location);
+        $statement->bindValue(':email', $email);
+        $statement->bindValue(':phone_number', $phone_number);
+        $statement->bindValue(':username', $username);
+        $statement->bindValue(':password', $password);
+        $statement->execute();
+        $statement->closeCursor();
+}
+
+?>
 </body>
 </html>
   
+ 
 
