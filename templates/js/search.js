@@ -6,6 +6,7 @@ $(document).ready(function(){
 	$('#priceSlider').slider({		
 	}).on('change', priceRange); 	
 });
+
 function priceRange(e){
 	$('.priceRange').html($(this).val() + " - 500");
 	$('#minPrice').val($(this).val());

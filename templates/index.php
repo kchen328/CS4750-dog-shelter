@@ -72,9 +72,4 @@ include('containers/header.php');
 	</div>
     </div>	
 </div>	
-
-
-
-
-
-
+<?php include('containers/footer.php');?>
