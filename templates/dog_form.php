@@ -1,6 +1,6 @@
 <?php
 require('connectdb.php');
-require('dog_shelter_db.php');
+// require('dog_shelter_db.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
@@ -106,6 +106,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
   
 </div>    
+<?php
+function addDog($preferred_environment, $dog_breed, $dog_size, $color, $activeness_level, $age, $name, $dog_shelter, $current_location, $shots_uptodate, $gender, $hypoallergenic, $fee, $ok_with_kids, $ok_with_other_pets, $description) 
+{
+        echo "happy dog";
+        global $db;
+        $query = "INSERT INTO dog(preferred_environment, dog_breed,   dog_size  ,   color  ,   activeness_level  ,   age  ,   name  ,   dog_shelter  ,   current_location  ,    shots_uptodate  ,   gender  ,   hypoallergenic  ,   fee  ,   ok_with_kids  ,   ok_with_other_pets  ,   description  ) VALUES(:preferred_environment, :dog_breed, :dog_size, :color, :activeness_level, :age, :name, :dog_shelter, :current_location,  :shots_uptodate, :gender, :hypoallergenic, :fee, :ok_with_kids, :ok_with_other_pets, :description)";
+        $statement = $db->prepare($query);
+        $statement->bindParam(':preferred_environment', $preferred_environment);
+        $statement->bindValue(':dog_breed', $dog_breed);
+        $statement->bindValue(':dog_size', $dog_size);
+        $statement->bindValue(':color', $color);
+        $statement->bindValue(':activeness_level', $activeness_level);
+        $statement->bindValue(':age', $age);
+        $statement->bindParam(':name', $name);
+        $statement->bindValue(':dog_shelter', $dog_shelter);
+        $statement->bindValue(':current_location', $current_location);
+        $statement->bindValue(':shots_uptodate', $shots_uptodate);
+        $statement->bindValue(':gender', $gender);
+        $statement->bindValue(':hypoallergenic', $hypoallergenic);
+        $statement->bindValue(':fee', $fee);
+        $statement->bindValue(':ok_with_kids', $ok_with_kids);
+        $statement->bindValue(':ok_with_other_pets', $ok_with_other_pets);
+        $statement->bindValue(':description', $description);
+        $statement->execute();
+        echo "executed";
+        $statement->closeCursor();
+}
+
+?>
 </body>
 </html>
   

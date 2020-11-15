@@ -69,6 +69,7 @@
             // user found
           }
           else{
+              
             echo "username doesn't match our records! <br />";
           }
         }
@@ -91,11 +92,13 @@
 
           $results = $query->fetch();
           $password_hashed = $results[2];
-
           // account exists, now we verify the password
-          if(password_verify($pwd, $password_hashed)){
-            // password matches
-          }
+        //   if(password_verify($pwd, $password_hashed)){
+        //     // password matches
+        //   }
+            if($password_hashed == $pwd){
+                
+            }
           else{
             echo "Password doesn't match our records!";
           }

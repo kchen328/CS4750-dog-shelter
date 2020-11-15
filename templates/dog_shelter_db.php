@@ -22,15 +22,15 @@ function addDog($preferred_environment, $dog_breed, $dog_size, $color, $activene
 {
         echo "happy dog";
         global $db;
-        $query = "INSERT INTO dog (  preferred_environment  ,   dog_breed  ,   dog_size  ,   color  ,   activeness_level  ,   age  ,   name  ,   dog_shelter  ,   current_location  ,    shots_uptodate  ,   gender  ,   hypoallergenic  ,   fee  ,   ok_with_kids  ,   ok_with_other_pets  ,   description  ) VALUES(:preferred_environment, :dog_breed, :dog_size, :color, :activeness_level, :age, :name, :dog_shelter, :current_location,  :shots_uptodate, :gender, :hypoallergenic, :fee, :ok_with_kids, :ok_with_other_pets, :description)";
+        $query = "INSERT INTO dog(preferred_environment, dog_breed,   dog_size  ,   color  ,   activeness_level  ,   age  ,   name  ,   dog_shelter  ,   current_location  ,    shots_uptodate  ,   gender  ,   hypoallergenic  ,   fee  ,   ok_with_kids  ,   ok_with_other_pets  ,   description  ) VALUES(:preferred_environment, :dog_breed, :dog_size, :color, :activeness_level, :age, :name, :dog_shelter, :current_location,  :shots_uptodate, :gender, :hypoallergenic, :fee, :ok_with_kids, :ok_with_other_pets, :description)";
         $statement = $db->prepare($query);
-        $statement->bindValue(':preferred_environment', $preferred_environment);
+        $statement->bindParam(':preferred_environment', $preferred_environment);
         $statement->bindValue(':dog_breed', $dog_breed);
         $statement->bindValue(':dog_size', $dog_size);
         $statement->bindValue(':color', $color);
         $statement->bindValue(':activeness_level', $activeness_level);
         $statement->bindValue(':age', $age);
-        $statement->bindValue(':name', $name);
+        $statement->bindParam(':name', $name);
         $statement->bindValue(':dog_shelter', $dog_shelter);
         $statement->bindValue(':current_location', $current_location);
         $statement->bindValue(':shots_uptodate', $shots_uptodate);
@@ -42,7 +42,7 @@ function addDog($preferred_environment, $dog_breed, $dog_size, $color, $activene
         $statement->bindValue(':description', $description);
         $statement->execute();
         echo "executed";
-        $statement->closeCursor();
+        // $statement->closeCursor();
 }
  
 function addPotentialAdopter($first_name, $last_name, $gender, $age, $location, $email, $living_style, $number_of_kids, $number_of_adults, $activeness_level, $max_age, $max_price, $hypoallergenic, $additional_information)
@@ -77,5 +77,5 @@ function showAll(){
        $statement->closecursor();
         return $results;
 }
-// showAll();
+showAll();
 ?>
