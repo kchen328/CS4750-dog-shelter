@@ -17,18 +17,8 @@
       <div class="wrap-login100">
         <form action="<?php $_SERVER['PHP_SELF']?>" method="POST">
           <span class="login100-form-title">
-            Login
-          </span>
-
-          <br>
-          <p> Are you a potential adopter or dog shelter?</p>
-          <div style="color:white;padding:10px;">
-        
-          <br>
-          <select name="taskOption" id="type">
-              <option value="1">Dog Shelter</option>
-              <option value="2">Potential Adopter</option>
-            </select> 
+            Adopter Login 
+</span>
           <br>
           <br>
           <div class="wrap-input100 ">
@@ -57,16 +47,12 @@
 <?php
     function validate_username(){
       global $db;
-      // $selectOption = $_POST['type2'];
-      // echo ($selectOption);
       if( isset($_POST['username']) && (strlen($_POST['username']) == 0) ){ 
         echo "Please enter your username!";
       }
       elseif( isset($_POST['username']) && (strlen($_POST['username']) != 0) ){
         $username = trim($_POST['username']);
-        //dog_shelter
-        if($selectOption = 'Dog Shelter'){
-        if($query = $db->prepare('SELECT DogShelterID, password FROM dog_shelter WHERE username = :username')){
+        if($query = $db->prepare('SELECT AdopterID, password FROM potential_adopter WHERE username = :username')){
           $query->bindValue(':username', $username);
           $query->execute();
           $user = $query->fetchAll();
@@ -74,27 +60,12 @@
             // user found
           }
           else{
-              
-            echo "Username doesn't exist! <br />";
+            echo "username doesn't exist! <br />";
           }
         }
-        }
-        if($_POST['type'] = 'Potential Adopter'){
-          if($query = $db->prepare('SELECT AdopterID, password FROM potential_adopter WHERE username = :username')){
-            $query->bindValue(':username', $username);
-            $query->execute();
-            $user = $query->fetchAll();
-            if(count($user) > 0){
-              // user found
-            }
-            else{
-                
-              echo "Username doesn't exist! <br />";
-            }
-          }
-          }
       }
     }
+
     function validate_pwd(){
       global $db; //database
       if(isset($_POST['username']) && (strlen($_POST['username']) == 0) ){ 
@@ -104,8 +75,8 @@
       elseif(isset($_POST['username'])){
         $username = trim($_POST['username']);
         $pwd = trim($_POST['pwd']);
-        if($_POST['type'] = 'Dog Shelter'){
-        if( (isset($_POST['username'])) && ($query = $db->prepare('SELECT * FROM dog_shelter WHERE username = :username')) ){
+      
+        if( (isset($_POST['username'])) && ($query = $db->prepare('SELECT * FROM potential_adopter WHERE username = :username')) ){
           $query->bindValue(':username', $username);
           $query->execute();
 
@@ -119,75 +90,16 @@
           }
         }
       }
-      if($_POST['type'] = 'Potential Adopter'){
-      if( (isset($_POST['username'])) && ($query = $db->prepare('SELECT * FROM potential_adopter WHERE username = :username')) ){
-        $query->bindValue(':username', $username);
-        $query->execute();
-
-        $results = $query->fetch();
-        $password_hashed = $results[2];
-          if($password_hashed == $pwd){
-              
-          }
-        else{
-          echo "Password doesn't exist!";
-        }
-      }
-      }
-    }
     }
 ?>
 <script type="text/javascript">
   function redirect(){
-    window.location.href = 'http://localhost/CS4750-dog-shelter/templates/profile.php';
-  }
-  function redirect2(){
     window.location.href = 'http://localhost/CS4750-dog-shelter/templates/profile-potential.php';
   }
 </script>
 <?php
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $selectOption = $_POST['taskOption'];
-
-    if($selectOption = 'Dog_Shelter'){
-      echo $selectOption;
     $username = trim($_POST['username']);
-    $pwd = trim($_POST['pwd']);
-    if($query = $db->prepare('SELECT * FROM dog_shelter WHERE username = :username')){
-      $query->bindValue(':username', $username);
-      $query->execute();
-
-      $results = $query->fetch();
-      $id = $results[0]; 
-      $username = $results[1]; 
-      $password_hash = $results[2];
-      $name = $results[3];
-      $location = $results[4];
-      $email = $results[5];
-      $phone_number = $results[6];
-      if(($password_hash == $pwd)){
-        session_regenerate_id();
-        $_SESSION['loggedin'] = TRUE;
-        $_SESSION['id'] = $id;
-        $_SESSION['email'] = $email;
-        $_SESSION['pwd'] = trim($_POST['pwd']);
-        $_SESSION['pwd_hashed'] = $password_hash;
-        $_SESSION['name'] = $name;
-        $_SESSION['location'] = $location;
-        $_SESSION['phone_number'] = $phone_number;
-        echo '<script type="text/javascript">',
-        'redirect();',
-        '</script>';
-      }
-      else{
-          echo "failed the session";
-      }
-    }
-  }
-  elseif($selectOption = 'Potential_Adopter'){
-    $username = trim($_POST['username']);
-    echo $selectOption;
-    echo "help";
     $pwd = trim($_POST['pwd']);
     if($query = $db->prepare('SELECT * FROM potential_adopter WHERE username = :username')){
       $query->bindValue(':username', $username);
@@ -226,7 +138,7 @@
         $_SESSION['number_of_adults'] = $number_of_adults;
   
         echo '<script type="text/javascript">',
-        'redirect2();',
+        'redirect();',
         '</script>';
       }
       else{
@@ -234,8 +146,4 @@
       }
     }
   }
-
-
-
-}
 ?>

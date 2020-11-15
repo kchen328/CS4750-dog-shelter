@@ -16,7 +16,7 @@
     <?php
       session_start();
       if (!isset($_SESSION['loggedin'])) {
-        header('Location: http://localhost/CS4750-dog-shelter/templates/login.php');
+        header('Location: http://localhost/CS4750-dog-shelter/templates/login-potential.php');
         exit;
       } 
     ?>
@@ -83,11 +83,11 @@
 
     <section>
       <div class="card">
-        <h1>Welcome to your dog shelter's profile!</h1>
+        <h1>Welcome to your Adopter's profile!</h1>
         <hr>
 
         <div class="oneline" style="padding-top:15px;"> 
-          <span class="title1">Name:</span> 
+          <span class="title1">First Name:</span> 
           <span class="title2"><?php echo $_SESSION['name'];?></span>
         </div>
 
@@ -106,7 +106,7 @@
           <span class="title2"><?php echo $_SESSION['phone_number'];?></span>
         </div>
 
-        <button  class="login100-form-btn" onclick="window.location.href = 'http://localhost/CS4750-dog-shelter/templates/shelter-form.php';">Edit Info</button> <br>
+        <button  class="login100-form-btn" onclick="window.location.href = 'http://localhost/CS4750-dog-shelter/templates/potential_adopter_form.php';">Edit Info</button> <br>
       </div>
     </section>
 
