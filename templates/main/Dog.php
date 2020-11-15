@@ -1,8 +1,8 @@
 <?php
 class Dog {
-	private $host  = 'localhost';
-    private $user  = 'root';
-    private $password   = "";
+	private $host  = 'localhost:3306';
+    private $user  = 'kk6ev';
+    private $password   = "F4ll2020!!";
     private $database  = "dog_website";   
 	private $dogTable = 'dog';
 	private $dbConnect = false;
