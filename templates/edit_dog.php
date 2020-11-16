@@ -20,7 +20,7 @@ require('connectdb.php');
 
          updateDog($_POST['preferred_environment'], $_POST['dog_breed'], $_POST['size'],
                        $_POST['color'], $_POST['activeness_level'], $_POST['age'],
-                       $_POST['name'], $_POST['dog_shelter'], $_POST['current_location'],
+                       $_POST['name'], $_POST['current_location'],
                        $_POST['shots_uptodate'], $_POST['gender'], $_POST['hypoallergenic'],
                        $_POST['fee'], $_POST['ok_with_kids'], $_POST['ok_with_other_pets'],
                        $_POST['description'], $id);
@@ -148,7 +148,7 @@ function myAjax() {
     <div> Shots up to date:</div>
      <input type="radio" name="shots_uptodate" value="1" <?php echo ($item['shots_uptodate']=='1' ? 'checked' : '')?> />
      <label for="1">Yes</label><br>
-     <input type="radio" name="shots_uptodate" value="0" <?php echo ($item['shotes_uptodate']=='0' ? 'checked' : '')?> />
+     <input type="radio" name="shots_uptodate" value="0" <?php echo ($item['shots_uptodate']=='0' ? 'checked' : '')?> />
      <label for="0">No</label><br>
    </div>
  <div class="form-group">
@@ -182,7 +182,7 @@ function myAjax() {
      <label for="0">No</label><br>
    </div>
 
-  <div class=form-group">
+  <div class="form-group">
   Health conditions:
 <p><a href="javascript:addElement();" ><label type="button" class="btn btn-outline-primary btn-sm">Add condition</label></a></p>
   
@@ -190,8 +190,10 @@ function myAjax() {
  <?php foreach($health_conditions as $hc): ?>
  <div>
     <input type="text"  name=<?php echo $hc['underlying_conditions']?>  value="<?php echo $hc['underlying_conditions']?>"/>
-    <button class='btn btn-outline-primary btn-sm del_btn btn-outline-danger' onclick="deleteItem(this); '<?php deleteUnderlyingCondition($dog_id, $hc['underlying_conditions'])?>'" >Remove</button> 
-</div>
+    <!-- <button class='btn btn-outline-primary btn-sm del_btn btn-outline-danger' onclick="deleteItem(this); '<?php// deleteUnderlyingCondition($dog_id, $hc['underlying_conditions'])?>'" >Remove</button>  -->
+
+        <button name="deletebutton" style="color:red" class="login100-form-btn" >Delete Account</button> <br>
+  </div>
 <?php endforeach; ?>
 </div>
   <div class="form-group">
@@ -199,6 +201,7 @@ function myAjax() {
     <input type="text" class="form-control" name="description" value="<?php echo $item['description']?>"/>
   </div>
 <!--
+
   <div class=="form-group">
   Add image: <br>
     <input type="file" name="dog_image" value="" /><div> 
@@ -211,14 +214,30 @@ function myAjax() {
   
 
 </form>  
+
+<?php 
+// if($_SERVER['REQUEST_METHOD'] == 'POST'){
+  if(isset($_POST['deletebutton'])){
+  global $db;
+  $condition = $hc['underlying_conditions'];
+  $dog_id = $id;
+  $query = "DELETE FROM dog_underlying_conditions WHERE DogID=:dog_id and underlying_conditions=:condition;";
+  $statement = $db->prepare($query);
+  $statement->bindValue(':dog_id', $dog_id);
+  $statement->bindValue(':condition', $condition);
+  $statement->execute();
+  $statement->closeCursor();
+  }
+}
+ ?>
 <?php endforeach; ?>
   
 </div>    
 <?php
-function updateDog($preferred_environment, $dog_breed, $dog_size, $color, $activeness_level, $age, $name, $dog_shelter, $current_location, $shots_uptodate, $gender, $hypoallergenic, $fee, $ok_with_kids, $ok_with_other_pets, $description, $dog_id) 
+function updateDog($preferred_environment, $dog_breed, $dog_size, $color, $activeness_level, $age, $name, $current_location, $shots_uptodate, $gender, $hypoallergenic, $fee, $ok_with_kids, $ok_with_other_pets, $description, $dog_id) 
 {
         global $db;
-        $query = "UPDATE dog SET preferred_environment=:preferred_environment, dog_breed=:dog_breed, dog_size=:dog_size, color=:color, activeness_level=:activeness_level, age=:age, name=:name, dog_shelter=:dog_shelter, current_location=:current_location, shots_uptodate=:shots_uptodate, gender=:gender, hypoallergenic=:hypoallergenic, fee=:fee, ok_with_kids=:ok_with_kids, ok_with_other_pets=:ok_with_other_pets, description=:description WHERE DogID=:dog_id";
+        $query = "UPDATE dog SET preferred_environment=:preferred_environment, dog_breed=:dog_breed, dog_size=:dog_size, color=:color, activeness_level=:activeness_level, age=:age, name=:name, current_location=:current_location, shots_uptodate=:shots_uptodate, gender=:gender, hypoallergenic=:hypoallergenic, fee=:fee, ok_with_kids=:ok_with_kids, ok_with_other_pets=:ok_with_other_pets, description=:description WHERE DogID=:dog_id";
 
         $statement = $db->prepare($query);
         $statement->bindValue(':preferred_environment', $preferred_environment);
@@ -228,7 +247,6 @@ function updateDog($preferred_environment, $dog_breed, $dog_size, $color, $activ
         $statement->bindValue(':activeness_level', $activeness_level);
         $statement->bindValue(':age', $age);
         $statement->bindParam(':name', $name);
-        $statement->bindValue(':dog_shelter', $dog_shelter);
         $statement->bindValue(':current_location', $current_location);
         $statement->bindValue(':shots_uptodate', $shots_uptodate);
         $statement->bindValue(':gender', $gender);
@@ -292,6 +310,13 @@ function deleteUnderlyingCondition($dog_id, $condition){
 
 }
 ?>
+<script>
+  function redirect(){ //for dog shelter
+    window.location.href = 'https://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/profile.php';
+    // window.location.href = 'https://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/profile.php';
+  }
+ 
+</script>
 </body>
 </html>
   

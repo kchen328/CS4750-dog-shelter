@@ -15,7 +15,7 @@
     <?php
       session_start();
       if (!isset($_SESSION['loggedin'])) {
-        header('Location: http://localhost/CS4750-dog-shelter/templates/login-potential.php');
+        header('Location: http://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/login-potential.php');
         exit;
       } 
     ?>
@@ -76,7 +76,7 @@
           <span class="title1">Number of adults: </span> 
           <span class="title2"><?php echo $_SESSION['number_of_adults'];?></span>
         </div>
-        <button  class="login100-form-btn" onclick="window.location.href = 'http://localhost/CS4750-dog-shelter/templates/potential_adopter_form.php';">Edit Info</button> <br>
+        <button  class="login100-form-btn" onclick="window.location.href = 'http://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/edit_adopter.php';">Edit Info</button> <br>
         <p>-or-</p>
         <form method="post"> 
         <button name="deletebutton" style="color:red" class="login100-form-btn" >Delete Account</button> <br>
@@ -87,7 +87,7 @@
   </body>
   <script>
   function redirect_potent(){ //for potential adopter
-    window.location.href = 'http://localhost/CS4750-dog-shelter/templates/index.php';
+    window.location.href = 'http://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/index.php';
   }
 </script>
   <?php 

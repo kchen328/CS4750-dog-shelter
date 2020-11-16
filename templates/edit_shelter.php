@@ -1,3 +1,10 @@
+<?php
+      session_start();
+      if (!isset($_SESSION['loggedin'])) {
+        header('Location:http://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/login.php');
+        exit;
+      } 
+	?>
  <?php
 require('connectdb.php');
 // require('dog_shelter_db.php');
@@ -5,7 +12,7 @@ require('connectdb.php');
  function setVars() {
         global $db;
 //        $id = $_GET['DogID'];
-        $query = "SELECT * FROM dog_shelter WHERE DogShelterID=5";
+        $query = "SELECT * FROM dog_shelter WHERE DogShelterID='" . $_SESSION['id'] . "';"; //id
         $statement = $db->prepare($query);
         $statement->execute();
         $results = $statement->fetchAll();
@@ -14,7 +21,7 @@ require('connectdb.php');
       }
 
 
-    $id = 3;
+    $id = $_SESSION['id']; //id
     $sqlQuery = setVars();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')

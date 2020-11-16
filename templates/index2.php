@@ -5,7 +5,7 @@ include('containers/header.php');
   <?php
       session_start();
       if (!isset($_SESSION['loggedin'])) {
-        header('Location: http://localhost/CS4750-dog-shelter/templates/login.php');
+        header('Location: http://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/login.php');
         exit;
       } 
 	?>
@@ -22,12 +22,13 @@ include('containers/header.php');
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="http://localhost/CS4750-dog-shelter/templates/index2.php">Home</a></li>
-			<li class="active"><a href="http://localhost/CS4750-dog-shelter/templates/profile.php">My Profile</a></li>
-			<li class="active"><a href="http://localhost/CS4750-dog-shelter/templates/matches.php">Matches</a></li>
-			<li class="active"><a href="http://localhost/CS4750-dog-shelter/templates/dog_form.php">Add Dog</a></li>
-			<li class="active"><a href="http://localhost/CS4750-dog-shelter/templates/logout.php">Signout</a></li>
-          </ul>
+            <li class="active"><a href="http://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/index2.php">Home</a></li>
+			<li class="active"><a href="http://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/profile.php">My Profile</a></li>
+			<li class="active"><a href="http://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/matches.php">Matches</a></li>
+			<li class="active"><a href="http://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/dog_form.php">Add Dog</a></li>
+			<li class="active"><a href="http://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/logout.php">Signout</a></li>
+		  
+		</ul>
          
         </div>
       </div>

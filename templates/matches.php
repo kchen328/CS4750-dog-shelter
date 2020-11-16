@@ -11,7 +11,7 @@
 <?php
       session_start();
       if (!isset($_SESSION['loggedin'])) {
-        header('Location: http://localhost/CS4750-dog-shelter/templates/login.php');
+        header('Location: http://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/login.php');
         exit;
       } 
     ?>

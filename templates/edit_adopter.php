@@ -1,9 +1,16 @@
 <?php
+      session_start();
+      if (!isset($_SESSION['loggedin'])) {
+        header('Location:http://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/login.php');
+        exit;
+      } 
+	?>
+<?php
 require('connectdb.php');
 //require('dog_shelter_db.php');
 $dog_breeds = getAllDogBreeds();
 $dog_colors = getAllDogColors();
-$id = 1;
+$id = $_SESSION['id']; //cuurrent adopter
 $adopter_size= getSizeForAdopter($id); 
 $adopter_breed = getBreedForAdopter($id);
 $adopter_color = getColorForAdopter($id);
@@ -37,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 function setVars() {
         global $db;
 //        $id = $_GET['DogID'];
-        $query = "SELECT * FROM potential_adopter WHERE AdopterID=1";
+        $query = "SELECT * FROM potential_adopter WHERE AdopterID='" . $_SESSION['id'] . "';"; 
         $statement = $db->prepare($query);
         $statement->execute();
         $results = $statement->fetchAll();
@@ -46,7 +53,7 @@ function setVars() {
 }
 
 
-    $id = 3;
+    // $id = 3;
     $sqlQuery = setVars();
 ?>
 

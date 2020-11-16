@@ -18,10 +18,10 @@
 /******************************/
 // connecting to DB on XAMPP (local)
 
-//$username = 'kk6ev';
-//$password = 'F4ll2020!!';
-//$host = 'localhost:3306';
-//$dbname = 'dog_website';
+// $username = 'kk6ev';
+// $password = 'F4ll2020!!';
+// $host = 'localhost:3306';
+// $dbname = 'dog_website';
 
 
 /******************************/
