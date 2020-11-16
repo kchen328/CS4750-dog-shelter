@@ -3,6 +3,10 @@ require('connectdb.php');
 //require('dog_shelter_db.php');
 $dog_breeds = getAllDogBreeds();
 $dog_colors = getAllDogColors();
+$id = 1;
+$adopter_size= getSizeForAdopter($id); 
+$adopter_breed = getBreedForAdopter($id);
+$adopter_color = getColorForAdopter($id);
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
         if (!empty($_POST['action']) && ($_POST['action'] == 'Add'))
@@ -30,6 +34,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
         }
 }
+function setVars() {
+        global $db;
+//        $id = $_GET['DogID'];
+        $query = "SELECT * FROM potential_adopter WHERE AdopterID=1";
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $results = $statement->fetchAll();
+        $statement->closecursor();
+        return $results;
+}
+
+
+    $id = 3;
+    $sqlQuery = setVars();
 ?>
 
 <!DOCTYPE html>
@@ -49,72 +67,75 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 <body>
 <div class="container">
 
-<h1>Potential Adopter Create Account</h1>
-
+<h1>Edit Potential Adopter</h1>
+<?php foreach($sqlQuery as $item): ?>
 <!-- <form action="formprocessing.php" method="post">  -->
 <form name="mainForm" action="potential_adopter_form.php" method="post">
-     <div class="form-group">
-    Username:
-    <input type="text" class="form-control" name="username" required />
-  </div>
   <div class="form-group">
     Password:
     <input type="text" class="form-control" name="password" required />
   </div>
   <div class="form-group">
     First name:
-    <input type="text" class="form-control" name="first_name" required />
+    <input value="<?php echo $item['first_name']?>" type="text" class="form-control" name="first_name" required />
   </div>
   <div class="form-group">
     Last name:
-    <input type="text" class="form-control" name="last_name" required />
+    <input  value="<?php echo $item['last_name']?>" type="text" class="form-control" name="last_name" required />
   </div>
 
   <div class="form-group">
     Gender:
-    <input type="text" class="form-control" name="gender" required />
+    <input  value="<?php echo $item['gender']?>" type="text" class="form-control" name="gender" required />
 </div>
   <div class="form-group">
     Age:
-    <input type="number" class="form-control" name="age" required max="125" min="18"/>
+    <input  value="<?php echo $item['age']?>"  type="number" class="form-control" name="age" required max="125" min="18"/>
   </div>
   <div class="form-group">
     Location:
-    <input type="text" class="form-control" name="location" required/>
+    <input  value="<?php echo $item['location']?>" type="text" class="form-control" name="location" required/>
   </div>
 <div class="form-group">
     Email:
-    <input type="text" class="form-control" name="email" required />
+    <input  value="<?php echo $item['email']?>" type="text" class="form-control" name="email" required />
   </div>
   <div class="form-group">
    Living style:
-    <input type="text" class="form-control" name="living_style" required />
+    <input  value="<?php echo $item['living_style']?>"  type="text" class="form-control" name="living_style" required />
   </div>
   <div class="form-group">
     Number of kids:
-    <input type="number" class="form-control" name="number_of_kids" required max="50" min="0"/>
+    <input  value="<?php echo $item['number_of_kids']?>"  type="number" class="form-control" name="number_of_kids" required max="50" min="0"/>
   </div>
   <div class="form-group">
     Number of adults:
-    <input type="number" class="form-control" name="number_of_adults" required max="50" min="0" />
+    <input  value="<?php echo $item['number_of_adults']?>" type="number" class="form-control" name="number_of_adults" required max="50" min="0" />
   </div>
    <div class="form-group">
     Activeness level:
-    <input type="text" class="form-control" name="activeness_level"    />
+    <input  value="<?php echo $item['activeness_level']?>" type="text" class="form-control" name="activeness_level"    />
   </div>
  <div class="form-group">
    Additional information:
-    <input type="text" class="form-control" name="additional_information" required />
+    <input  value="<?php echo $item['additional_information']?>" type="text" class="form-control" name="additional_information" required />
   </div>
   <div class="form-group">
     <div> Hypoallergenic:</div>
-     <input type="radio" name="hypoallergenic" value="1">
-     <label for="1">Yes</label><br>
-     <input type="radio" name="hypoallergenic" value="0">
-     <label for="0">No</label><br>
+        <input type="radio" name="hypoallergenic" value="1" <?php echo ($item['hypoallergenic']=='1' ? 'checked' : '')?> />
+        <label for="1">Yes</label><br>
+        <input type="radio" name="hypoallergenic" value="0" <?php echo ($item['hypoallergenic']=='0' ? 'checked' : '')?> />
+        <label for="0">No</label><br>
    </div>
   <div class="form-group">
        <h3>Dog breed preference</h3>
+       Current:
+<?php foreach($adopter_breed as $ad): ?>
+     <div>
+    <input type="text"  name=<?php echo $ad['dog_breed']?>  value="<?php echo $ad['dog_breed']?>"/>
+    <button class='btn btn-outline-primary btn-sm del_btn btn-outline-danger' onclick="return this.parentNode.remove();" >Remove</button> 
+     </div>
+<?php endforeach; ?>
        <div class="breedSection">
            <input type="checkbox" name=breeds[]  value="any">
            <label for="any">Any</label><br>
@@ -128,6 +149,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   </div>
   <div class="form-group">
        <div>Dog color prefernce<div>
+   <?php foreach($adopter_color as $ac): ?>
+     <div>
+    <input type="text"  name=<?php echo $ac['dog_color']?>  value="<?php echo $ac['dog_color']?>"/>
+    <button class='btn btn-outline-primary btn-sm del_btn btn-outline-danger' onclick="return this.parentNode.remove();" >Remove</button>
+     </div>
+<?php endforeach; ?>
        <div class="breedSection">
            <input type="checkbox" name=colors[]  value="any">
            <label for="any">Any</label><br>
@@ -149,6 +176,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   </div>
 <div class="form-group">
   Size of dog: <br>
+  <?php foreach($adopter_size as $as): ?>
+     <div>
+    <input type="text"  name=<?php echo $as['dog_size']?>  value="<?php echo $as['dog_size']?>"/>
+    <button class='btn btn-outline-primary btn-sm del_btn btn-outline-danger' onclick="return this.parentNode.remove();" >Remove</button>
+     </div>
+<?php endforeach; ?>
   <input type="checkbox" name="sizes[]" value="small">
   <label for="small">Small</label><br>
   <input type="checkbox" name="sizes[]" value="medium">
@@ -158,6 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 </div>
  <input type="submit" value="Add" name="action" class="btn btn-dark" title="Insert a friend into a friends table" />
 </form>
+<?php endforeach; ?>
 
 </div>
 <!--  <input type="submit" value="Confirm update" name="action" class="btn btn-dark" title="Confirm update a friend" /> -->
@@ -252,6 +286,41 @@ function getAllDogColors(){
         $results = $statement->fetchAll();
         $statement->closeCursor();
         return $results;
+}
+
+function getBreedForAdopter($adopter_id){
+    global $db;
+    $query = "SELECT dog_breed FROM potential_adopter_dog_breed WHERE AdopterID=:adopter_id";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':adopter_id', $adopter_id);
+    $statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closeCursor();
+    return $results;
+    
+}
+
+function getColorForAdopter($adopter_id){
+    global $db;
+    $query = "SELECT dog_color FROM potential_adopter_dog_color WHERE AdopterID=:adopter_id";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':adopter_id', $adopter_id);
+    $statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closeCursor();
+    return $results;
+}
+
+function getSizeForAdopter($adopter_id){
+    global $db;
+    $query = "SELECT dog_size FROM potential_adopter_dog_size WHERE AdopterID=:adopter_id";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':adopter_id', $adopter_id);
+    $statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closeCursor();
+    return $results;
+    
 }
 ?>
 

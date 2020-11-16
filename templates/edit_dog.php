@@ -31,6 +31,7 @@ require('connectdb.php');
                }
          }
     } 
+         
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +41,7 @@ require('connectdb.php');
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="your name">
   <meta name="description" content="include some description about your page">      
-  <title>Add dog</title>
+  <title>Edit dog</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="shortcut icon" href="http://www.cs.virginia.edu/~up3f/cs4750/images/db-icon.png" type="image/ico" />  
@@ -80,6 +81,22 @@ for (var i = 0; i < btn.length; i++) {
     //e.target.parentNode.parentNode.removeChild(e.target.parentNode);
   }, false);
 }
+ function deleteItem(item ){
+return item.parentNode.remove();
+}
+function myAjax() {
+      $.ajax({
+           type: "POST",
+           url: 'your_url/ajax.php',
+           data:{action:''},
+           success:function(html) {
+             alert(html);
+           }
+
+      });
+     return item.parentNode.remove();
+
+ }
 
     </script>
 </head>
@@ -87,7 +104,7 @@ for (var i = 0; i < btn.length; i++) {
 <body>
 <div class="container">
 
-<h1>Add a Dog</h1>
+<h1>Edit dog</h1>
 <?php foreach($sqlQuery as $item): ?>
 <form name="mainForm" action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
   <div class="form-group">
@@ -172,8 +189,8 @@ for (var i = 0; i < btn.length; i++) {
     <div id="content">
  <?php foreach($health_conditions as $hc): ?>
  <div>
-    <input type="text"  name=<?php echo $hc['underlying_condition']?>  value="<?php echo $hc['underlying_condition']?>"/>
-    <button class='btn btn-outline-primary btn-sm del_btn btn-outline-danger' onclick="return this.parentNode.remove();" >Remove</button> 
+    <input type="text"  name=<?php echo $hc['underlying_conditions']?>  value="<?php echo $hc['underlying_conditions']?>"/>
+    <button class='btn btn-outline-primary btn-sm del_btn btn-outline-danger' onclick="deleteItem(this); '<?php deleteUnderlyingCondition($dog_id, $hc['underlying_conditions'])?>'" >Remove</button> 
 </div>
 <?php endforeach; ?>
 </div>
@@ -240,9 +257,7 @@ function selectDogID($name, $dog_shelter){
 
 function addUnderlyingCondition($dog_id, $underlying_condition){
      global $db;
-     echo $dog_id;
-     $query = "INSERT INTO dog_underlying_conditions(DogID, underlying_condition) VALUES(:dog_id, :underlying_condition);";
-     echo $underlying_condition;
+     $query = "INSERT INTO dog_underlying_conditions(DogID, underlying_conditions) VALUES(:dog_id, :underlying_condition);";
     
      $statement = $db->prepare($query);
      $statement->bindValue(':dog_id', $dog_id);
@@ -253,7 +268,7 @@ function addUnderlyingCondition($dog_id, $underlying_condition){
 
 function getUnderlyingCondition($dog_id){
     global $db;
-    $query = "SELECT underlying_condition FROM dog_underlying_conditions WHERE DogID=:dog_id";
+    $query = "SELECT underlying_conditions FROM dog_underlying_conditions WHERE DogID=:dog_id";
     $statement = $db->prepare($query);
     $statement->bindValue(':dog_id', $dog_id);
     $statement->execute();
@@ -263,7 +278,19 @@ function getUnderlyingCondition($dog_id){
     
 }
 
+function deleteUnderlyingCondition($dog_id, $condition){
+    global $db;
+    $query = "DELETE FROM dog_underlying_conditions WHERE DogID=:dog_id and underlying_conditions=:condition;";
+    echo $query;
+    $statement = $db->prepare($query);
+    $statement->bindValue(':dog_id', $dog_id);
+    $statement->bindValue(':condition', $condition);
+    $statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closeCursor();
+    return $results;
 
+}
 ?>
 </body>
 </html>

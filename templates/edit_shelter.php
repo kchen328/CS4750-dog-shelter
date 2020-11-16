@@ -72,8 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 </form>  
 <?php endforeach; ?>
 
-
-  
 </div>    
 <?php
 function updateShelter($password, $name, $location, $email, $phone_number, $shelter_id)
