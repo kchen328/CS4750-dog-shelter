@@ -1,11 +1,11 @@
 <?php
 class Dog {
-	private $host  = 'localhost';
-    private $user  = 'root';
-    private $password   = "";
-    private $database  = "dog_website";   
-	private $dogTable = 'dog';
-	private $dbConnect = false;
+    private $user = 'aeb2de';
+    private $password = 'F4ll2020!!';
+    private $host = 'usersrv01.cs.virginia.edu';
+    private $database= 'aeb2de_dog_shelter';
+    private $dogTable = 'dog';
+    private $dbConnect = false;
     public function __construct(){
         if(!$this->dbConnect){ 
             $conn = new mysqli($this->host, $this->user, $this->password, $this->database);
