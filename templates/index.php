@@ -20,23 +20,23 @@ include('containers/header.php');
 			<h3>Price</h3>	
 			<div class="list-group-item">
 				<input id="priceSlider" data-slider-id='ex1Slider' type="text" data-slider-min="50" data-slider-max="500" data-slider-step="1" data-slider-value="14"/>
-				<div class="priceRange">50 - 500</div>
+				<div class="priceRange">0 - 500</div>
 				<input type="hidden" id="minPrice" value="0" />
 				<input type="hidden" id="maxPrice" value="500" />                  
 			</div>			
 		</div>    
 		<div class="list-group">
-			<h3>Breed</h3>
-			<div class="breedSection">
+			<!-- <h3>Breed</h3> -->
+			<!-- <div class="breedSection">
 				<?php
-				$Dog_breed = $dog->getBreed();
-				foreach($Dog_breed as $breedDetails){	
+				//$dog_breed = $dog->getBreed();
+				//foreach($dog_breed as $breedDetails){	
 				?>
 				<div class="list-group-item checkbox">
-				<label><input type="checkbox" class="dogDetail Dog_breed" value="<?php echo $breedDetails["Dog_breed"]; ?>"  > <?php echo $breedDetails["Dog_breed"]; ?></label>
+				<label><input type="checkbox" class="dogDetail dog_breed" value="<?php echo $breedDetails["dog_breed"]; ?>"  > <?php echo $breedDetails["dog_breed"]; ?></label>
 				</div>
-				<?php }	?>
-			</div>
+				<?php //}	?>
+			</div> -->
 		</div>
 		<div class="list-group">
 			<h3>Color</h3>

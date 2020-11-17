@@ -1,5 +1,5 @@
 <?php 
-
+// dogshelter
 include('containers/header.php');
 ?>
   <?php
@@ -26,7 +26,7 @@ include('containers/header.php');
 			<li class="active"><a href="http://www.localhost/CS4750-dog-shelter/templates/profile.php">My Profile</a></li>
 			<li class="active"><a href="http://www.localhost/CS4750-dog-shelter/templates/matches.php">Matches</a></li>
 			<li class="active"><a href="http://www.localhost/CS4750-dog-shelter/templates/dog_form.php">Add Dog</a></li>
-			<!-- <li class="active"><a href="http://www.localhost/CS4750-dog-shelter/templates/interested.php">interest</a></li> -->
+			<!-- <li class="active"><a href="http://www.localhost/CS4750-dog-shelter/templates/edit_dog.php">Edit Dog</a></li> -->
 			<li class="active"><a href="http://www.localhost/CS4750-dog-shelter/templates/logout.php">Signout</a></li>
 		  
 		</ul>
@@ -60,17 +60,17 @@ include('containers/header.php');
 			</div>			
 		</div>    
 		<div class="list-group">
-			<h3>Breed</h3>
+			<!-- <h3>Breed</h3>
 			<div class="breedSection">
 				<?php
-				$Dog_breed = $dog->getBreed();
-				foreach($Dog_breed as $breedDetails){	
+				// $dog_breed = $dog->getBreed();
+				// foreach($dog_breed as $breedDetails){	
 				?>
 				<div class="list-group-item checkbox">
-				<label><input type="checkbox" class="dogDetail Dog_breed" value="<?php echo $breedDetails["Dog_breed"]; ?>"  > <?php echo $breedDetails["Dog_breed"]; ?></label>
+				<label><input type="checkbox" class="dogDetail dog_breed" value="<?php echo $breedDetails["dog_breed"]; ?>"  > <?php echo $breedDetails["dog_breed"]; ?></label>
 				</div>
-				<?php }	?>
-			</div>
+				<?php //}	?> -->
+			<!-- </div> -->
 		</div>
 		<div class="list-group">
 			<h3>Color</h3>

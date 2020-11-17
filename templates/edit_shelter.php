@@ -1,10 +1,3 @@
-<script>
-  function redirect(){ //for dog shelter
-    // window.location.href = 'http://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/profile.php';
-    window.location.href = 'https://localhost/CS4750-dog-shelter/templates/index2.php';
-    // window.location.href = 'https://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/index2.php';
-  }
-</script>
 
 <?php
       session_start();
@@ -35,13 +28,11 @@ require('connectdb.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-       if (!empty($_POST['action']) && ($_POST['action'] == 'Update'))
+       if (isset($_POST['action']))
 	{
-		updateShelter($_POST['password'], $_POST['name'], $_POST['location'], $_POST['email'], $_POST['phone_number'], $id); 
+		updateShelter($_POST['location'], $_POST['email'], $_POST['phone_number'], $id); 
                 $sqlQuery = setVars();
-                echo '<script>',
-                'redirect();',
-                '</script>';
+                header('Location:http://www.localhost/CS4750-dog-shelter/templates/profile.php');
             
 	}
 }
@@ -68,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 <form name="mainForm" action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
   <!-- <div class="form-group">
     Name:
-    <input type="text" class="form-control" name="name"  value="<?php echo $item['name']?>"/>        
+    <input type="text" class="form-control" name="name"  value="<?php// echo $item['name']?>"/>        
   </div>   -->
   <div class="form-group">
     Location:
@@ -93,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 function updateShelter($location, $email, $phone_number, $shelter_id)
 {
         global $db;
+        
         $query = "UPDATE dog_shelter SET location=:location, email=:email, phone_number=:phone_number WHERE DogShelterID=:shelter_id";
         $statement = $db->prepare($query);
         // $statement->bindValue(':name', $name);

@@ -1,13 +1,8 @@
 <?php
 class Dog {
-	// private $user = 'kk6ev';
-    // private $password = 'F4ll2020!!';
-    // private $host = 'localhost:3306';
-    // private $database= 'dog_website';
-    // private $dogTable = 'dog';
-    private $user = 'root';
-    private $password = '';
-    private $host = 'localhost';
+    private $user = 'kk6ev';
+    private $password = 'F4ll2020!!';
+    private $host = 'localhost:3306';
     private $database= 'dog_website';
     private $dogTable = 'dog';
     private $dbConnect = false;
@@ -38,13 +33,15 @@ class Dog {
 			die('Error in query: '. mysqli_error());
 		}
 		$numRows = mysqli_num_rows($result);
+	
 		return $numRows;
 	}		
 	public function getBreed(){
 		$sqlQuery = "
-			SELECT DISTINCT(Dog_breed)
+			SELECT DISTINCT(dog_breed)
 			FROM ".$this->dogTable." 
-			ORDER BY Dog_breed ASC";
+			ORDER BY dog_breed ASC";
+	
         return  $this->getData($sqlQuery);
 	}
 	public function getSize(){
@@ -52,6 +49,7 @@ class Dog {
 			SELECT DISTINCT(dog_size)
 			FROM ".$this->dogTable." 
 			ORDER BY dog_size DESC";
+			
         return  $this->getData($sqlQuery);
 	}
 	public function getColor(){
@@ -62,15 +60,17 @@ class Dog {
         return  $this->getData($sqlQuery);
 	}
 	public function searchDogs(){
+		
 		$sqlQuery = "SELECT * FROM ".$this->dogTable." WHERE price > 0";
+		// print_r($this->getData($sqlQuery));
 		if(isset($_POST["minPrice"], $_POST["maxPrice"]) && !empty($_POST["minPrice"]) && !empty($_POST["maxPrice"])){
 			$sqlQuery .= "
 			AND price BETWEEN '".$_POST["minPrice"]."' AND '".$_POST["maxPrice"]."'";
 		}
-		if(isset($_POST["Dog_breed"])) {
-			$Dog_breedFilterData = implode("','", $_POST["Dog_breed"]);
+		if(isset($_POST["dog_breed"])) {
+			$Dog_breedFilterData = implode("','", $_POST["dog_breed"]);
 			$sqlQuery .= "
-			AND Dog_breed IN('".$Dog_breedFilterData."')";
+			AND dog_breed IN('".$Dog_breedFilterData."')";
 		}
 		if(isset($_POST["color"])){
 			$colorFilterData = implode("','", $_POST["color"]);
@@ -91,11 +91,10 @@ class Dog {
 				$searchResultHTML .= '
 				<div class="col-sm-4 col-lg-3 col-md-3">
 				<div class="dog">
-				<input type="checkbox">
 				<img src="images/dog.png" alt="" class="img-responsive" >
 				<p align="center"><strong><a href="main/dog-profile.php?DogID='. $row['DogID'] .'" id="info">'. $row['name'] .'</a></strong></p>
 				<h4 style="text-align:center;" class="text-danger" > $'. $row['price'] .'</h4>
-				<h6 style="text-align:center;"> Breed: '. $row['Dog_breed'] .'</h6>
+				<h6 style="text-align:center;"> Breed: '. $row['dog_breed'] .'</h6>
 				<h6 style="text-align:center;"> Color: '. $row['color'] .'</h6>
 				<h6 style="text-align:center;"> Size: '. $row['dog_size'] .'</h6>
 				</div>
@@ -104,6 +103,7 @@ class Dog {
 		} else {
 			$searchResultHTML = '<h3>No dog found.</h3>';
 		}
+		
 		return $searchResultHTML;	
 	}	
 }

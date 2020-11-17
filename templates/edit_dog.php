@@ -1,5 +1,11 @@
 <?php
 require('connectdb.php');
+      session_start();
+      if (!isset($_SESSION['loggedin'])) {
+        header('Location: http://www.localhost/CS4750-dog-shelter/templates/login.php');
+        exit;
+      } 
+
 // require('dog_shelter_db.php');
   function setVars() {
         global $db;

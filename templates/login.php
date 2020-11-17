@@ -168,6 +168,7 @@
         session_regenerate_id(); // replaces current session ID with new one
         $_SESSION['loggedin'] = TRUE;
         $_SESSION['id'] = $id;
+        $_SESSION['username'] = $username;
         $_SESSION['email'] = $email;
         $_SESSION['pwd'] = trim($_POST['pwd']);
         $_SESSION['pwd_hashed'] = $password_hash;
@@ -183,7 +184,7 @@
       }
     }
   }
-  elseif($selectOption == 2){
+  elseif($selectOption == 2){ //adopter
     $username = trim($_POST['username']);
     // $pwd = trim($_POST['pwd']);
     if($query = $db->prepare('SELECT * FROM potential_adopter WHERE username = :username')){

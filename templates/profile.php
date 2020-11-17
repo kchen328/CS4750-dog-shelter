@@ -23,31 +23,49 @@
         header('Location: http://www.localhost/CS4750-dog-shelter/templates/login.php');
         exit;
       } 
+      $id = $_SESSION['id'];
+      // echo($id);
+      function setVars() {
+        global $db;
+//        $id = $_GET['DogID'];
+        $query = "SELECT * FROM dog_shelter WHERE DogShelterID='" . $_SESSION['id'] . "';"; 
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $results = $statement->fetchAll();
+        $statement->closecursor();
+        return $results;
+}
+$sqlQuery = setVars();
     ?>
     <section>
       <div class="card">
         <h1>Welcome to your dog shelter's profile!</h1>
         <hr>
-
+        <?php foreach($sqlQuery as $items): ?>
         <div class="oneline" style="padding-top:15px;"> 
           <span class="title1">Name:</span> 
-          <span class="title2"><?php echo $_SESSION['name'];?></span>
+          <span class="title2"><?php echo $items['name'];?></span>
+        </div>
+        <div class="oneline"> 
+          <span class="title1">Username: </span> 
+          <span class="title2"><?php echo $items['username'];?></span>
         </div>
 
         <div class="oneline"> 
           <span class="title1">Location: </span> 
-          <span class="title2"><?php echo $_SESSION['location'];?></span>
+          <span class="title2"><?php echo $items['location'];?></span>
         </div>
 
         <div class="oneline"> 
           <span class="title1">Email:</span> 
-          <span class="title2"><?php echo $_SESSION['email'];?></span>
+          <span class="title2"><?php echo $items['email'];?></span>
         </div>
 
         <div class="oneline" style="padding-bottom:15px;"> 
           <span class="title1">Phone Number:</span> 
-          <span class="title2"><?php echo $_SESSION['phone_number'];?></span>
+          <span class="title2"><?php echo $items['phone_number'];?></span>
         </div>
+        <?php endforeach; ?>
         <!-- get all the dogs and be able to edit or delete them -->
 
         <button  class="login100-form-btn" style="border:2px solid black;" onclick="window.location.href = 'http://www.localhost/CS4750-dog-shelter/templates/edit_shelter.php';">Edit Info</button> <br>
@@ -75,7 +93,7 @@ $results = give_all_dogs();
         <br>
         <p><?php echo $item['name']; ?><p>
         <!-- <button class="login100-form-btn" style="width:30%;border:2px solid black;" onclick="window.location.href = 'http://www.localhost/CS4750-dog-shelter/templates/edit_dog.php';">Edit <?php //echo $item['name']; ?>'s Info</button> <br> -->
-        <a href="http://www.localhost/CS4750-dog-shelter/templates/edit_dog.php?id=<?php echo($item['DogID'])?>">edit </a>
+        <a style="width:30%;margin-left:35%;border:2px solid black;" class="login100-form-btn" href="http://www.localhost/CS4750-dog-shelter/templates/edit_dog.php?id=<?php echo($item['DogID'])?>">edit </a>
             <form method= "POST" action="<?php $_SERVER['PHP_SELF'] ?>" >
         <a href="delete.php?id=<?php echo($item['DogID'])?>" style="width:30%;margin-left:35%;border:2px solid black;" class=" button login100-form-btn" onclick="return confirm('Are you sure you want to completely remove this dog?');">Delete <?php echo $item['name']; ?></a>
     </form>

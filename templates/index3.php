@@ -58,17 +58,17 @@ include('containers/header.php');
 			</div>			
 		</div>    
 		<div class="list-group">
-			<h3>Breed</h3>
+			<!-- <h3>Breed</h3>
 			<div class="breedSection">
 				<?php
-				$Dog_breed = $dog->getBreed();
-				foreach($Dog_breed as $breedDetails){	
+				// $dog_breed = $dog->getBreed();
+				// foreach($dog_breed as $breedDetails){	
 				?>
 				<div class="list-group-item checkbox">
-				<label><input type="checkbox" class="dogDetail Dog_breed" value="<?php echo $breedDetails["Dog_breed"]; ?>"  > <?php echo $breedDetails["Dog_breed"]; ?></label>
+				<label><input type="checkbox" class="dogDetail dog_breed" value="<?php echo $breedDetails["dog_breed"]; ?>"  > <?php echo $breedDetails["dog_breed"]; ?></label>
 				</div>
-				<?php }	?>
-			</div>
+				<?php// }	?>
+			</div> -->
 		</div>
 		<div class="list-group">
 			<h3>Color</h3>

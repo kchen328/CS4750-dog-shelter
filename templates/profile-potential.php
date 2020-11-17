@@ -15,72 +15,108 @@
     <?php
       session_start();
       if (!isset($_SESSION['loggedin'])) {
-        header('Location: http://www.localhost/CS4750-dog-shelter/templates/login-potential.php');
+        header('Location: http://www.localhost/CS4750-dog-shelter/templates/login.php');
         exit;
       } 
+      $id = $_SESSION['id'];
+      // echo($id);
+      function setVars() {
+        global $db;
+//        $id = $_GET['DogID'];
+        $query = "SELECT * FROM potential_adopter WHERE AdopterID='" . $_SESSION['id'] . "';"; 
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $results = $statement->fetchAll();
+        $statement->closecursor();
+        return $results;
+}
+$sqlQuery = setVars();
+
     ?>
  
     <section>
+    <button name="goback" class="login100-form-btn" onclick="window.location.href ='https://www.localhost/CS4750-dog-shelter/templates/index3.php';" >Go Back</button> <br>
       <div class="card">
         <h1>Welcome to your Adopter's profile!</h1>
         <hr>
-
+        <?php foreach($sqlQuery as $item): ?>
         <div class="oneline" style="padding-top:15px;"> 
           <span class="title1">First Name:</span> 
-          <span class="title2"><?php echo $_SESSION['first_name'];?></span>
+          <span class="title2"><?php echo $item['first_name'];?></span>
         </div>
         <div class="oneline"> 
           <span class="title1">Last Name:</span> 
-          <span class="title2"><?php echo $_SESSION['last_name'];?></span>
+          <span class="title2"><?php echo $item['last_name'];?></span>
         </div>
 
         <div class="oneline"> 
           <span class="title1">Username: </span> 
-          <span class="title2"><?php echo $_SESSION['username'];?></span>
+          <span class="title2"><?php echo $item['username'];?></span>
         </div>
 
         <div class="oneline"> 
           <span class="title1">Gender: </span> 
-          <span class="title2"><?php echo $_SESSION['gender'];?></span>
+          <span class="title2"><?php echo $item['gender'];?></span>
         </div>
 
         <div class="oneline"> 
           <span class="title1">Age: </span> 
-          <span class="title2"><?php echo $_SESSION['age'];?></span>
+          <span class="title2"><?php echo $item['age'];?></span>
         </div>
 
         <div class="oneline"> 
           <span class="title1">Location: </span> 
-          <span class="title2"><?php echo $_SESSION['location'];?></span>
+          <span class="title2"><?php echo $item['location'];?></span>
         </div>
 
         <div class="oneline"> 
           <span class="title1">Email:</span> 
-          <span class="title2"><?php echo $_SESSION['email'];?></span>
+          <span class="title2"><?php echo $item['email'];?></span>
         </div>
 
         <div class="oneline"> 
           <span class="title1">Desired Activeness Level:</span> 
-          <span class="title2"><?php echo $_SESSION['activeness_level'];?></span>
+          <span class="title2"><?php echo $item['activeness_level'];?></span>
         </div>
 
         <div class="oneline"> 
           <span class="title1">Living Style: </span> 
-          <span class="title2"><?php echo $_SESSION['living_style'];?></span>
+          <span class="title2"><?php echo $item['living_style'];?></span>
         </div>
         <div class="oneline"> 
           <span class="title1">Number of kids in your household: </span> 
-          <span class="title2"><?php echo $_SESSION['number_of_kids'];?></span>
+          <span class="title2"><?php echo $item['number_of_kids'];?></span>
         </div>
         <div class="oneline"> 
           <span class="title1">Number of adults: </span> 
-          <span class="title2"><?php echo $_SESSION['number_of_adults'];?></span>
+          <span class="title2"><?php echo $item['number_of_adults'];?></span>
+        </div>
+        <div class="oneline"> 
+          <span class="title1">Number of Activeness Level: </span> 
+          <span class="title2"><?php echo $item['activeness_level'];?></span>
+        </div>
+        <div class="oneline"> 
+          <span class="title1">Max Age: </span> 
+          <span class="title2"><?php echo $item['max_age'];?></span>
+        </div>
+        <div class="oneline"> 
+          <span class="title1">Max Price: </span> 
+          <span class="title2"><?php echo $item['max_price'];?></span>
+        </div>
+        <div class="oneline"> 
+          <span class="title1">Hypoallergenic: </span> 
+          <span class="title2"><?php echo $item['hypoallergenic'];?></span>
+        </div>
+        <div class="oneline"> 
+          <span class="title1">Additional Information: </span> 
+          <span class="title2"><?php echo $item['additional_information'];?></span>
         </div>
         <button  class="login100-form-btn" onclick="window.location.href = 'http://www.localhost/CS4750-dog-shelter/templates/edit_adopter.php';">Edit Info</button> <br>
         <p>-or-</p>
         <form method="post"> 
         <button name="deletebutton" style="color:red" class="login100-form-btn" >Delete Account</button> <br>
         </form>
+        <?php endforeach; ?>
       </div>
     </section>
 

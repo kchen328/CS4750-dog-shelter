@@ -11,34 +11,35 @@ require('connectdb.php');
 $dog_breeds = getAllDogBreeds();
 $dog_colors = getAllDogColors();
 $id = $_SESSION['id']; //cuurrent adopter
+$username = $_SESSION['username'];
 $adopter_size= getSizeForAdopter($id); 
 $adopter_breed = getBreedForAdopter($id);
 $adopter_color = getColorForAdopter($id);
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-        if (!empty($_POST['action']) && ($_POST['action'] == 'Add'))
+        if (isset($_POST['action']))
         {
-             addPotentialAdopter($_POST['username'], $_POST['password'], $_POST['first_name'], $_POST['last_name'], $_POST['gender'], $_POST['age'],
+             updatePotentialAdopter($id,$_POST['first_name'], $_POST['last_name'], $_POST['gender'], $_POST['age'],
                                  $_POST['location'], $_POST['email'], $_POST['living_style'], $_POST['number_of_kids'],
                                  $_POST['number_of_adults'], $_POST['activeness_level'], $_POST['max_age'],
                                  $_POST['max_price'], $_POST['hypoallergenic'], $_POST['additional_information']);
-             $adopter_id = selectAdopterID($_POST['email']);
-             if(!empty($_POST['sizes'])){
+            //  $adopter_id = selectAdopterID($_POST['email']);
+             if(isset($_POST['sizes'])){
                 foreach($_POST['sizes'] as $size){
-                    addSizeForAdopter($adopter_id, $size);
+                    addSizeForAdopter($id, $size);
                  }
              }
-             if(!empty($_POST['breeds'])){
+             if(isset($_POST['breeds'])){
                 foreach($_POST['breeds'] as $breed){
-                    addDogBreedForAdopter($adopter_id, $breed);
+                    addDogBreedForAdopter($id, $breed);
                  }
              }
-             if(!empty($_POST['colors'])){
+             if(isset($_POST['colors'])){
                 foreach($_POST['colors'] as $dog_color){
-                    addColorForAdopter($adopter_id, $dog_color);
+                    addColorForAdopter($id, $dog_color);
                  }
              }
-
+            header('Location:http://www.localhost/CS4750-dog-shelter/templates/profile-potential.php');
         }
 }
 function setVars() {
@@ -77,11 +78,7 @@ function setVars() {
 <h1>Edit Potential Adopter</h1>
 <?php foreach($sqlQuery as $item): ?>
 <!-- <form action="formprocessing.php" method="post">  -->
-<form name="mainForm" action="potential_adopter_form.php" method="post">
-  <div class="form-group">
-    Password:
-    <input type="text" class="form-control" name="password" required />
-  </div>
+<form name="mainForm" action="edit_adopter.php" method="post">
   <div class="form-group">
     First name:
     <input value="<?php echo $item['first_name']?>" type="text" class="form-control" name="first_name" required />
@@ -136,13 +133,17 @@ function setVars() {
    </div>
   <div class="form-group">
        <h3>Dog breed preference</h3>
-       Current:
-<?php foreach($adopter_breed as $ad): ?>
+       <!-- Current: -->
+<?php foreach($adopter_breed as $key=>$ad): ?>
      <div>
-    <input type="text"  name=<?php echo $ad['dog_breed']?>  value="<?php echo $ad['dog_breed']?>"/>
-    <button class='btn btn-outline-primary btn-sm del_btn btn-outline-danger' onclick="return this.parentNode.remove();" >Remove</button> 
-     </div>
-<?php endforeach; ?>
+     
+    <!-- <input type="text"  name=<?php echo $ad['dog_breed']?>  value="<?php echo $ad['dog_breed']?>"/> -->
+    <!-- <button class='btn btn-outline-primary btn-sm del_btn btn-outline-danger' onclick="return this.parentNode.remove();" >Remove</button>  -->
+    <!-- <input type="hidden" name="key" value="<?php echo $key; ?>"/> -->
+    <!-- <button name="deletebreed" class="btn btn-outline-primary btn-sm del_btn btn-outline-danger"   >Delete Breed</button> <br>    -->
+
+  </div>
+<?php endforeach; ?>  
        <div class="breedSection">
            <input type="checkbox" name=breeds[]  value="any">
            <label for="any">Any</label><br>
@@ -158,9 +159,9 @@ function setVars() {
        <div>Dog color prefernce<div>
    <?php foreach($adopter_color as $ac): ?>
      <div>
-    <input type="text"  name=<?php echo $ac['dog_color']?>  value="<?php echo $ac['dog_color']?>"/>
+    <input type="text"  name="<?php echo $ac['dog_color']?>"  value="<?php echo $ac['dog_color']?>"/>
     <button class='btn btn-outline-primary btn-sm del_btn btn-outline-danger' onclick="return this.parentNode.remove();" >Remove</button>
-     </div>
+  </div>
 <?php endforeach; ?>
        <div class="breedSection">
            <input type="checkbox" name=colors[]  value="any">
@@ -175,18 +176,18 @@ function setVars() {
   </div>
   <div class="form-group">
    Max age of dog:
-<input type="number" class="form-control" name="max_age" required max="25" min="0"/>
+<input type="number" value="<?php echo $item['max_age']?>" class="form-control" name="max_age" required max="25" min="0"/>
   </div>
   <div class="form-group">
     Max price of dog:
-    <input type="number" class="form-control" name="max price" required max="10000" min="0" />
+    <input type="number" value="<?php echo $item['max_price']?>" class="form-control" name="max_price" required max="10000" min="0" />
   </div>
 <div class="form-group">
   Size of dog: <br>
   <?php foreach($adopter_size as $as): ?>
      <div>
-    <input type="text"  name=<?php echo $as['dog_size']?>  value="<?php echo $as['dog_size']?>"/>
-    <button class='btn btn-outline-primary btn-sm del_btn btn-outline-danger' onclick="return this.parentNode.remove();" >Remove</button>
+    <!-- <input type="text"  name=<?php //echo $as['dog_size']?>  value="<?php echo $as['dog_size']?>"/> -->
+    <!-- <button class='btn btn-outline-primary btn-sm del_btn btn-outline-danger' onclick="return this.parentNode.remove();" >Remove</button> -->
      </div>
 <?php endforeach; ?>
   <input type="checkbox" name="sizes[]" value="small">
@@ -196,21 +197,38 @@ function setVars() {
   <input type="checkbox" name="sizes[]" value="large">
   <label for="large">Large</label>
 </div>
- <input type="submit" value="Add" name="action" class="btn btn-dark" title="Insert a friend into a friends table" />
+ <input type="submit" value="Update" name="action" class="btn btn-dark" title="Insert a friend into a friends table" />
 </form>
 <?php endforeach; ?>
 
 </div>
 <!--  <input type="submit" value="Confirm update" name="action" class="btn btn-dark" title="Confirm update a friend" /> -->
 <?php
-function addPotentialAdopter($username, $password,$first_name, $last_name, $gender, $age, $location, $email, $living_style, $number_of_kids, $number_of_adults, $activeness_level, $max_age, $max_price, $hypoallergenic, $additional_information)
+ 
+//  if(isset($_POST['deletebreed'])){
+//   global $db;
+//   $id= $_SESSION['id'];
+//   // $condition = $ad['dog_breed'];
+//   echo($id);
+//   echo "help"; 
+//   // echo($condition);
+//   echo($_GET)
+//   // $query = "DELETE FROM potential_adopter_dog_breed WHERE AdopterID=:adopter_id and dog_breed=:dog_breed;";
+//   // $statement = $db->prepare($query);
+//   // $statement->bindValue(':id', $id);
+//   // $statement->bindValue(':dog_breed', $condition);
+//   // $statement->execute();
+//   // $statement->closeCursor();
+//   }
+
+function updatePotentialAdopter($id,$first_name, $last_name, $gender, $age, $location, $email, $living_style, $number_of_kids, $number_of_adults, $activeness_level, $max_age, $max_price, $hypoallergenic, $additional_information)
 {
         global $db;
-        $query = "INSERT INTO potential_adopter(username, password, first_name, last_name, gender, age, location, email, living_style, number_of_kids, number_of_adults, activeness_level, max_age, max_price, hypoallergenic, additional_information) VALUES(:username, :password, :first_name, :last_name, :gender, :age, :location, :email, :living_style, :number_of_kids, :number_of_adults, :activeness_level, :max_age, :max_price, :hypoallergenic, :additional_information)";
+        // $query = "INSERT INTO potential_adopter(username, password, first_name, last_name, gender, age, location, email, living_style, number_of_kids, number_of_adults, activeness_level, max_age, max_price, hypoallergenic, additional_information) VALUES(:username, :password, :first_name, :last_name, :gender, :age, :location, :email, :living_style, :number_of_kids, :number_of_adults, :activeness_level, :max_age, :max_price, :hypoallergenic, :additional_information)";
+        $query = "UPDATE potential_adopter SET first_name=:first_name,last_name=:last_name,age=:age,email=:email,location=:location,living_style=:living_style,gender=:gender,number_of_kids=:number_of_kids,number_of_adults=:number_of_adults, activeness_level=:activeness_level,max_age=:max_age, hypoallergenic=:hypoallergenic,max_price=:max_price, additional_information=:additional_information WHERE AdopterID=:adopter_id";
         $statement = $db->prepare($query);
-        $statement->bindValue(':username', $username);
-        $statement->bindValue(':password', $password);
         $statement->bindValue(':first_name', $first_name);
+        $statement->bindValue(':adopter_id', $id);
         $statement->bindValue(':last_name', $last_name);
         $statement->bindValue(':age', $age);
         $statement->bindValue(':location', $location);
@@ -267,7 +285,7 @@ function addDogBreedForAdopter($adopter_id, $breed){
 
 function addColorForAdopter($adopter_id, $dog_color){
      global $db;
-     $query = "INSERT INTO potential_adopter_dog_color(AdopterID, dog_color) VALUES(:adopter_id, :dog_color);";
+     $query = "INSERT INTO potential_adopter_color(AdopterID, dog_color) VALUES(:adopter_id, :dog_color);";
 
      $statement = $db->prepare($query);
      $statement->bindValue(':adopter_id', $adopter_id);

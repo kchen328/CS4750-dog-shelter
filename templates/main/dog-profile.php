@@ -32,7 +32,7 @@
         <hr>
         <div class="oneline" style="padding-top:15px;"> 
           <span class="title1">Breed:</span> 
-          <span class="title2"><?php echo $item['Dog_breed']?></span>
+          <span class="title2"><?php echo $item['dog_breed']?></span>
           <br>
           <span class="title1">Price:</span> 
           <span class="title2"><?php echo $item['price']?></span>
@@ -50,7 +50,7 @@
           <span class="title2"><?php echo $item['age']?></span>
           <br>
           <span class="title1">Preferred Environment:</span> 
-          <span class="title2"><?php echo $item['Preferred_environment']?></span>
+          <span class="title2"><?php echo $item['preferred_environment']?></span>
           <br>
           <span class="title1">Activeness Level:</span> 
           <span class="title2"><?php echo $item['activeness_level']?></span>
