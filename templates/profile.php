@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<?php include('containers/header.php'); ?>
 
   <title>Dog_Who</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> 
   <link rel="stylesheet" type="text/css" href="../css/main.css"> 
   <link rel="stylesheet" href="../css/style.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/css/bootstrap-slider.min.css" rel="stylesheet"/>
@@ -23,6 +18,7 @@
         header('Location: http://www.localhost/CS4750-dog-shelter/templates/login.php');
         exit;
       } 
+      include('containers/container2.php');
     ?>
     <section>
       <div class="card">
@@ -33,25 +29,25 @@
           <span class="title1">Name:</span> 
           <span class="title2"><?php echo $_SESSION['name'];?></span>
         </div>
-
+        <br>
         <div class="oneline"> 
           <span class="title1">Location: </span> 
           <span class="title2"><?php echo $_SESSION['location'];?></span>
         </div>
-
+        <br> 
         <div class="oneline"> 
           <span class="title1">Email:</span> 
           <span class="title2"><?php echo $_SESSION['email'];?></span>
         </div>
-
+        <br>
         <div class="oneline" style="padding-bottom:15px;"> 
           <span class="title1">Phone Number:</span> 
           <span class="title2"><?php echo $_SESSION['phone_number'];?></span>
         </div>
         <!-- get all the dogs and be able to edit or delete them -->
 
-        <button  class="login100-form-btn" style="border:2px solid black;" onclick="window.location.href = 'http://www.localhost/CS4750-dog-shelter/templates/edit_shelter.php';">Edit Info</button> <br>
-    
+        <button  class="login100-form-btn" style="border:2px solid black;" onclick="window.location.href = 'http://localhost/CS4750-dog-shelter/templates/shelter-form.php';"><h4>Edit Info</h4></button> <br>
+
         </div>
         <div class="card">
             <?php
@@ -145,3 +141,4 @@ $results = give_all_dogs();
       }
       }
     </style>
+    <?php include('containers/footer.php'); ?>

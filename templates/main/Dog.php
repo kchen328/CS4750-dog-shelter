@@ -5,9 +5,9 @@ class Dog {
     // private $host = 'localhost:3306';
     // private $database= 'dog_website';
     // private $dogTable = 'dog';
-    private $user = 'root';
-    private $password = '';
-    private $host = 'localhost';
+    private $user = 'kk6ev';
+    private $password = 'F4ll2020!!';
+    private $host = 'localhost:3306';
     private $database= 'dog_website';
     private $dogTable = 'dog';
     private $dbConnect = false;

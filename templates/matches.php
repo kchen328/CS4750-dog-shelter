@@ -1,11 +1,9 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<?php include('containers/header.php'); ?>
   <title>Dog_Who</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="../css/main.css">  
+  <link rel="stylesheet" type="text/css" href="../css/style.css">  
 <?php require('connectdb.php'); ?> 
 </head>
 <?php
@@ -13,7 +11,8 @@
       if (!isset($_SESSION['loggedin'])) {
         header('Location: http://www.localhost/CS4750-dog-shelter/templates/login.php');
         exit;
-      } 
+      }
+      include('containers/container2.php');
     ?>
 <?php
  $results = match_potentialadopter_dog();
@@ -45,9 +44,4 @@
         <br>
     </tr>
  <?php endforeach; ?>
-</body>
-
-
-
-
-</html>
+ <?php include('containers/footer.php'); ?>

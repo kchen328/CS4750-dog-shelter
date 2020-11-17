@@ -6,34 +6,10 @@ include('containers/header.php');
       session_start();
       if (!isset($_SESSION['loggedin'])) {
         header('Location: http://www.localhost/CS4750-dog-shelter/templates/login.php');
-        exit;
+		exit;
+		include('containers/containder2.php');
       } 
 	?>
-	<div role="navigation" class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a href="#" class="navbar-brand">Dog Shelter</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="http://www.localhost/CS4750-dog-shelter/templates/index2.php">Home</a></li>
-			<li class="active"><a href="http://www.localhost/CS4750-dog-shelter/templates/profile.php">My Profile</a></li>
-			<li class="active"><a href="http://www.localhost/CS4750-dog-shelter/templates/matches.php">Matches</a></li>
-			<li class="active"><a href="http://www.localhost/CS4750-dog-shelter/templates/dog_form.php">Add Dog</a></li>
-			<!-- <li class="active"><a href="http://www.localhost/CS4750-dog-shelter/templates/interested.php">interest</a></li> -->
-			<li class="active"><a href="http://www.localhost/CS4750-dog-shelter/templates/logout.php">Signout</a></li>
-		  
-		</ul>
-         
-        </div>
-      </div>
-    </div>
 	
 	<div class="container" style="min-height:500px;">
 <title>Dog Shelter Database</title>
@@ -106,7 +82,7 @@ include('containers/header.php');
 	</div>
     </div>	
 </div>	
-
+<?php include('containers/footer.php');?>
 
 
 
