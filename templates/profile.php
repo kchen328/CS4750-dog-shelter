@@ -20,7 +20,7 @@
     <?php
       session_start();
       if (!isset($_SESSION['loggedin'])) {
-        header('Location: http://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/login.php');
+        header('Location: http://www.localhost/CS4750-dog-shelter/templates/login.php');
         exit;
       } 
     ?>
@@ -50,7 +50,7 @@
         </div>
         <!-- get all the dogs and be able to edit or delete them -->
 
-        <button  class="login100-form-btn" style="border:2px solid black;" onclick="window.location.href = 'http://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/edit_shelter.php';">Edit Info</button> <br>
+        <button  class="login100-form-btn" style="border:2px solid black;" onclick="window.location.href = 'http://www.localhost/CS4750-dog-shelter/templates/edit_shelter.php';">Edit Info</button> <br>
     
         </div>
         <div class="card">
@@ -74,8 +74,8 @@ $results = give_all_dogs();
             
         <br>
         <p><?php echo $item['name']; ?><p>
-        <button class="login100-form-btn" style="width:30%;border:2px solid black;" onclick="window.location.href = 'http://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/edit_dog.php';">Edit <?php echo $item['name']; ?>'s Info</button> <br>
-        
+        <!-- <button class="login100-form-btn" style="width:30%;border:2px solid black;" onclick="window.location.href = 'http://www.localhost/CS4750-dog-shelter/templates/edit_dog.php';">Edit <?php //echo $item['name']; ?>'s Info</button> <br> -->
+        <a href="http://www.localhost/CS4750-dog-shelter/templates/edit_dog.php?id=<?php echo($item['DogID'])?>">edit </a>
             <form method= "POST" action="<?php $_SERVER['PHP_SELF'] ?>" >
         <a href="delete.php?id=<?php echo($item['DogID'])?>" style="width:30%;margin-left:35%;border:2px solid black;" class=" button login100-form-btn" onclick="return confirm('Are you sure you want to completely remove this dog?');">Delete <?php echo $item['name']; ?></a>
     </form>

@@ -4,13 +4,31 @@ require('connectdb.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-        if (!empty($_POST['action']) && ($_POST['action'] == 'Add'))
-	{
+        // if (!empty($_POST['action']) && ($_POST['action'] == 'Add'))
+	// {
     $p=trim($_POST['password']);
     $pwd = password_hash($p, PASSWORD_BCRYPT);
 		addShelter($_POST['username'], $pwd, $_POST['name'], $_POST['location'], $_POST['email'], $_POST['phone_number']); 
-	}
+	// }
 }
+
+?>
+<?php
+function addShelter($username, $password, $name, $location, $email, $phone_number)
+{
+        global $db;
+        $query = "INSERT INTO dog_shelter(username, password, name, location, email, phone_number) VALUES(:username, :password, :name, :location, :email, :phone_number)";
+        $statement = $db->prepare($query);
+        $statement->bindParam(':name', $name);
+        $statement->bindValue(':location', $location);
+        $statement->bindValue(':email', $email);
+        $statement->bindValue(':phone_number', $phone_number);
+        $statement->bindValue(':username', $username);
+        $statement->bindValue(':password', $password);
+        $statement->execute();
+        $statement->closeCursor();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -63,23 +81,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
   
 </div>    
-<?php
-function addShelter($username, $password, $name, $location, $email, $phone_number)
-{
-        global $db;
-        $query = "INSERT INTO dog_shelter(username, password, name, location, email, phone_number) VALUES(:username, :password, :name, :location, :email, :phone_number)";
-        $statement = $db->prepare($query);
-        $statement->bindParam(':name', $name);
-        $statement->bindValue(':location', $location);
-        $statement->bindValue(':email', $email);
-        $statement->bindValue(':phone_number', $phone_number);
-        $statement->bindValue(':username', $username);
-        $statement->bindValue(':password', $password);
-        $statement->execute();
-        $statement->closeCursor();
-}
-
-?>
 </body>
 </html>
   

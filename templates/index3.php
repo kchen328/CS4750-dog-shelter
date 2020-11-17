@@ -6,7 +6,7 @@ include('containers/header.php');
   <?php
       session_start();
       if (!isset($_SESSION['loggedin'])) {
-        header('Location: http://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/login.php');
+        header('Location: http://www.localhost/CS4750-dog-shelter/templates/login.php');
         exit;
       } 
 	?>
@@ -23,10 +23,10 @@ include('containers/header.php');
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="http://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/index3.php">Home</a></li>
-			<li class="active"><a href="https://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/profile-potential.php">My Profile</a></li>
-			<li class="active"><a href="http://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/interestedin.php">Interests</a></li>
-			<li class="active"><a href="https://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/logout.php">Signout</a></li>
+            <li class="active"><a href="http://www.localhost/CS4750-dog-shelter/templates/index3.php">Home</a></li>
+			<li class="active"><a href="https://www.localhost/CS4750-dog-shelter/templates/profile-potential.php">My Profile</a></li>
+			<li class="active"><a href="http://www.localhost/CS4750-dog-shelter/templates/interested.php">Interests</a></li>
+			<li class="active"><a href="https://www.localhost/CS4750-dog-shelter/templates/logout.php">Signout</a></li>
           </ul>
          
         </div>

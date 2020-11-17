@@ -4,7 +4,7 @@ require('connectdb.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-        if (!empty($_POST['action']) && ($_POST['action'] == 'Add'))
+        if (isset($_POST['action'] ))
 	{
 		addDog($_POST['preferred_environment'], $_POST['dog_breed'], $_POST['size'], 
                        $_POST['color'], $_POST['activeness_level'], $_POST['age'],
@@ -18,62 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                         addUnderlyingCondition($dog_id, $health_cond);
                      }
                  }
- /*
-                 $upload_dir = dirname(__FILE__) . "/images/";
-                 echo $upload_dir;
-                 if(is_dir($upload_dir)){
-                     echo "is directory";
-                   if(  is_writable($upload_dir)) {
-                         // do upload logic here
-                          echo "can upload";
-                     } else {
-                         echo 'Upload directory is not writable, or does not exist.';
-                     }
-                  }                   
-                 echo $upload_dir;
-  
-                 if(!empty($_FILES['dog_image'])){
- 
-                     $imagename=$_FILES['dog_image']['name'];
-                     $target_file= $upload_dir . $dog_id . basename($_FILES["dog_image"]["name"]); 
-                     echo $target_file; 
-                     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-                     $uploadOK = getimagesize($_FILES["dog_image"]["tmp_name"]); 
-                     $check = getimagesize($_FILES["dog_image"]["tmp_name"]);
-                     if($check !== false) {
-                         echo "File is an image - " . $check["mime"] . ".";
-                         $uploadOk = 1;
-                     } else {
-                         echo "File is not an image.";
-                         $uploadOk = 0;
-                     }
-                     if (file_exists($target_file)) {
-                         $uploadOk = 0;
-                     }
-                     if ($_FILES["dog_image"]["size"] > 500000) {
-                         echo "too big";
-                         $uploadOk = 0;
-                     } 
-                     if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-                     && $imageFileType != "gif" ) {
-                           echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-                           $uploadOk = 0;
-                     }
-                     if ($uploadOk == 0) {
-                         echo "Sorry, your file was not uploaded.";
-                       // if everything is ok, try to upload file
-                     } else {
-                         if (move_uploaded_file($_FILES["dog_file"]["tmp_name"], $target_file)) {
-                           echo "The file ". htmlspecialchars( basename( $_FILES["dog_image"]["name"])). " has been uploaded.";
-                         } else {
-                           echo "Sorry, there was an error uploading your file.";
-                         }
-                     }
-                     addImage($dog_id, $targetfile);
-
-  
-                 }
-  */
 	}
 }
 ?>
@@ -210,15 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
    Description
     <input type="text" class="form-control" name="description"   />
   </div>
-<!--
-  <div class=="form-group">
-  Add image: <br>
-    <input type="file" name="dog_image" value="" /><div> 
 
-  
- <form method="POST" action="index.php" enctype="multipart/form-data">
- </div> 
--->
  <input type="submit" value="Add" name="action" class="btn btn-dark" title="Insert a friend into a friends table" /> 
   
 </form>  
@@ -229,6 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 function addDog($preferred_environment, $dog_breed, $dog_size, $color, $activeness_level, $age, $name, $dog_shelter, $current_location, $shots_uptodate, $gender, $hypoallergenic, $fee, $ok_with_kids, $ok_with_other_pets, $description ) 
 {
         global $db;
+        echo($dog_size)
         $query = "INSERT INTO dog(preferred_environment, dog_breed, dog_size, color, activeness_level, age, name, dog_shelter, current_location, shots_uptodate, gender, hypoallergenic, fee, ok_with_kids, ok_with_other_pets, description) VALUES(:preferred_environment, :dog_breed, :dog_size, :color, :activeness_level, :age, :name, :dog_shelter, :current_location,  :shots_uptodate, :gender, :hypoallergenic, :fee, :ok_with_kids, :ok_with_other_pets, :description)";
         $statement = $db->prepare($query);
         $statement->bindParam(':preferred_environment', $preferred_environment);
@@ -293,4 +230,3 @@ function insertImage($dog_id, $imagepath){
 ?>
 </body>
 </html>
-  

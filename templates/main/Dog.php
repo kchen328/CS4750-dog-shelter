@@ -1,9 +1,14 @@
 <?php
 class Dog {
-    private $user = 'aeb2de';
-    private $password = 'F4ll2020!!';
-    private $host = 'usersrv01.cs.virginia.edu';
-    private $database= 'aeb2de_dog_shelter';
+	// private $user = 'kk6ev';
+    // private $password = 'F4ll2020!!';
+    // private $host = 'localhost:3306';
+    // private $database= 'dog_website';
+    // private $dogTable = 'dog';
+    private $user = 'root';
+    private $password = '';
+    private $host = 'localhost';
+    private $database= 'dog_website';
     private $dogTable = 'dog';
     private $dbConnect = false;
     public function __construct(){

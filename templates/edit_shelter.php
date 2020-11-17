@@ -1,9 +1,18 @@
+<script>
+  function redirect(){ //for dog shelter
+    // window.location.href = 'http://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/profile.php';
+    window.location.href = 'https://localhost/CS4750-dog-shelter/templates/index2.php';
+    // window.location.href = 'https://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/index2.php';
+  }
+</script>
+
 <?php
       session_start();
       if (!isset($_SESSION['loggedin'])) {
-        header('Location:http://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/login.php');
+        header('Location:http://www.localhost/CS4750-dog-shelter/templates/login.php');
         exit;
       } 
+  
 	?>
  <?php
 require('connectdb.php');
@@ -30,6 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
 		updateShelter($_POST['password'], $_POST['name'], $_POST['location'], $_POST['email'], $_POST['phone_number'], $id); 
                 $sqlQuery = setVars();
+                echo '<script>',
+                'redirect();',
+                '</script>';
+            
 	}
 }
 ?>
@@ -53,14 +66,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 <h1>Edit Shelter Account</h1>
 <?php foreach($sqlQuery as $item): ?>
 <form name="mainForm" action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
-<div class="form-group">
-    Password:
-    <input type="text" class="form-control" name="password"  required />        
-  </div> 
-  <div class="form-group">
+  <!-- <div class="form-group">
     Name:
     <input type="text" class="form-control" name="name"  value="<?php echo $item['name']?>"/>        
-  </div>  
+  </div>   -->
   <div class="form-group">
     Location:
     <input type="text" class="form-control" name="location"  value="<?php echo $item['location']?>" /> 
@@ -70,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     <input type="text" class="form-control" name="phone_number"  value="<?php echo $item['phone_number']?>"/>        
   </div> 
   <div class="form-group">
-    Email 
+    Email:
     <input type="text" class="form-control" name="email" value="<?php echo $item['email']?>" />
   </div>
      
@@ -81,19 +90,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
 </div>    
 <?php
-function updateShelter($password, $name, $location, $email, $phone_number, $shelter_id)
+function updateShelter($location, $email, $phone_number, $shelter_id)
 {
         global $db;
-        $query = "UPDATE dog_shelter SET password=:password, name=:name, location=:location, email=:email, phone_number=:phone_number WHERE DogShelterID=:shelter_id";
+        $query = "UPDATE dog_shelter SET location=:location, email=:email, phone_number=:phone_number WHERE DogShelterID=:shelter_id";
         $statement = $db->prepare($query);
-        $statement->bindValue(':name', $name);
+        // $statement->bindValue(':name', $name);
         $statement->bindValue(':location', $location);
         $statement->bindValue(':email', $email);
         $statement->bindValue(':phone_number', $phone_number);
         $statement->bindValue(':shelter_id', $shelter_id);
-        $statement->bindValue(':password', $password);
+        // $statement->bindValue(':password', $password);
         $statement->execute();
         $statement->closeCursor();
+        $_SESSION['email'] = $email;
+        $_SESSION['location'] = $location;
+        $_SESSION['phone_number'] = $phone_number;
 }
 
 ?>

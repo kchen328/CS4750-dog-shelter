@@ -110,6 +110,7 @@
 
           $results = $query->fetch();
           $password_hashed = $results[2];
+          
             if(password_verify($pwd,$password_hashed)){
                 
             }
@@ -138,13 +139,10 @@
 ?>
 <script>
   function redirect(){ //for dog shelter
-    // window.location.href = 'http://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/profile.php';
-    // window.location.href = 'https://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/index2.php';
-    window.location.href = 'https://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/index2.php';
+    window.location.href = 'https://www.localhost/CS4750-dog-shelter/templates/index2.php';
   }
   function redirect_potent(){ //for potential adopter
-    // window.location.href = 'https://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/index3.php';
-    window.location.href = 'https://www.cs.virginia.edu/~aeb2de/CS4750-dog-shelter/templates/index3.php';
+    window.location.href = 'https://www.localhost/CS4750-dog-shelter/templates/index3.php';
   }
 </script>
 <?php

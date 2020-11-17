@@ -1,3 +1,10 @@
+<script>
+  // function redirect(){ //for dog shelter
+  //   window.location.href = 'https://www.localhost/CS4750-dog-shelter/templates/login.php';
+  //   // window.location.href = 'https://www.localhost/CS4750-dog-shelter/templates/profile.php';
+  // }
+ 
+</script>
 <?php
 require('connectdb.php');
 //require('dog_shelter_db.php');
@@ -5,14 +12,17 @@ $dog_breeds = getAllDogBreeds();
 $dog_colors = getAllDogColors();
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-        if (!empty($_POST['action']) && ($_POST['action'] == 'Add'))
+        if (isset($_POST['action']))
         {
           $p=trim($_POST['password']);
       $pwd = password_hash($p, PASSWORD_BCRYPT);
+      // $hypo =$_POST['hypoallergenic'];
+      $hypo= "test";
+      
              addPotentialAdopter($_POST['username'],  $pwd, $_POST['first_name'], $_POST['last_name'], $_POST['gender'], $_POST['age'],
                                  $_POST['location'], $_POST['email'], $_POST['living_style'], $_POST['number_of_kids'],
                                  $_POST['number_of_adults'], $_POST['activeness_level'], $_POST['max_age'],
-                                 $_POST['max_price'], $_POST['hypoallergenic'], $_POST['additional_information']);
+                                 $_POST['max_price'], $hypo, $_POST['additional_information']);
              $adopter_id = selectAdopterID($_POST['email']);
              if(!empty($_POST['sizes'])){
                 foreach($_POST['sizes'] as $size){
@@ -29,6 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                     addColorForAdopter($adopter_id, $dog_color);
                  }
              }
+             header('Location:http://www.localhost/CS4750-dog-shelter/templates/login.php');
+    //          echo '<script>',
+    // 'redirect();',
+    // '</script>';
 
         }
 }
@@ -61,44 +75,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   </div>
   <div class="form-group">
     Password:
-    <input type="text" class="form-control" name="password" required />
+    <input type="text" class="form-control" name="password" required  />
   </div>
   <div class="form-group">
     First name:
-    <input type="text" class="form-control" name="first_name" required />
+    <input type="text" class="form-control" name="first_name"  />
   </div>
   <div class="form-group">
     Last name:
-    <input type="text" class="form-control" name="last_name" required />
+    <input type="text" class="form-control" name="last_name"  />
   </div>
 
   <div class="form-group">
     Gender:
-    <input type="text" class="form-control" name="gender" required />
+    <input type="text" class="form-control" name="gender"  />
 </div>
   <div class="form-group">
     Age:
-    <input type="number" class="form-control" name="age" required max="125" min="18"/>
+    <input type="number" class="form-control" name="age"  max="125" min="18"/>
   </div>
   <div class="form-group">
     Location:
-    <input type="text" class="form-control" name="location" required/>
+    <input type="text" class="form-control" name="location" />
   </div>
 <div class="form-group">
     Email:
-    <input type="text" class="form-control" name="email" required />
+    <input type="text" class="form-control" name="email"  />
   </div>
   <div class="form-group">
    Living style:
-    <input type="text" class="form-control" name="living_style" required />
+    <input type="text" class="form-control" name="living_style"  />
   </div>
   <div class="form-group">
     Number of kids:
-    <input type="number" class="form-control" name="number_of_kids" required max="50" min="0"/>
+    <input type="number" class="form-control" name="number_of_kids"  max="50" min="0"/>
   </div>
   <div class="form-group">
     Number of adults:
-    <input type="number" class="form-control" name="number_of_adults" required max="50" min="0" />
+    <input type="number" class="form-control" name="number_of_adults" max="50" min="0" />
   </div>
    <div class="form-group">
     Activeness level:
@@ -106,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   </div>
  <div class="form-group">
    Additional information:
-    <input type="text" class="form-control" name="additional_information" required />
+    <input type="text" class="form-control" name="additional_information" />
   </div>
   <div class="form-group">
     <div> Hypoallergenic:</div>
@@ -143,11 +157,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   </div>
   <div class="form-group">
    Max age of dog:
-<input type="number" class="form-control" name="max_age" required max="25" min="0"/>
+<input type="number" class="form-control" name="max_age"  max="25" min="0"/>
   </div>
   <div class="form-group">
     Max price of dog:
-    <input type="number" class="form-control" name="max price" required max="10000" min="0" />
+    <input type="number" class="form-control" name="max price"  max="10000" min="0" />
   </div>
 <div class="form-group">
   Size of dog: <br>
@@ -167,7 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 function addPotentialAdopter($username, $password,$first_name, $last_name, $gender, $age, $location, $email, $living_style, $number_of_kids, $number_of_adults, $activeness_level, $max_age, $max_price, $hypoallergenic, $additional_information)
 {
         global $db;
-        $query = "INSERT INTO potential_adopter(username, password, first_name, last_name, gender, age, location, email, living_style, number_of_kids, number_of_adults, activeness_level, max_age, max_price, hypoallergenic, additional_information) VALUES(:username, :password, :first_name, :last_name, :gender, :age, :location, :email, :living_style, :number_of_kids, :number_of_adults, :activeness_level, :max_age, :max_price, :hypoallergenic, :additional_information)";
+        $query = "INSERT INTO potential_adopter(username,password,first_name,last_name,gender,age,location,email,living_style,number_of_kids,number_of_adults,activeness_level,max_age,max_price,hypoallergenic,additional_information) VALUES(:username, :password, :first_name, :last_name,:gender,:age,:location,:email,:living_style,:number_of_kids,:number_of_adults,:activeness_level,:max_age,:max_price,:hypoallergenic,:additional_information)";
         $statement = $db->prepare($query);
         $statement->bindValue(':username', $username);
         $statement->bindValue(':password', $password);
@@ -176,8 +190,8 @@ function addPotentialAdopter($username, $password,$first_name, $last_name, $gend
         $statement->bindValue(':age', $age);
         $statement->bindValue(':location', $location);
         $statement->bindValue(':email', $email);
-        $statement->bindValue(':gender', $gender);
-        $statement->bindValue(':living_style', $living_style);
+        $statement->bindValue(':gender', $gender); 
+        $statement->bindValue(':living_style', $living_style); //works
         $statement->bindValue(':number_of_kids', $number_of_kids);
         $statement->bindValue(':number_of_adults', $number_of_adults);
         $statement->bindValue(':activeness_level', $activeness_level);
@@ -228,7 +242,8 @@ function addDogBreedForAdopter($adopter_id, $breed){
 
 function addColorForAdopter($adopter_id, $dog_color){
      global $db;
-     $query = "INSERT INTO potential_adopter_dog_color(AdopterID, dog_color) VALUES(:adopter_id, :dog_color);";
+     
+     $query = "INSERT INTO potential_adopter_dog_color(AdopterID,dog_color) VALUES(:adopter_id, :dog_color);";
 
      $statement = $db->prepare($query);
      $statement->bindValue(':adopter_id', $adopter_id);
