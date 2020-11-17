@@ -9,7 +9,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="#" class="navbar-brand">Dog Shelter</a>
+          <a href="#" class="navbar-brand">The Dog Network</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>Dog_Who</title>
+  <title>The Dog Network</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> 
   <link rel="stylesheet" type="text/css" href="../css/main.css"> 
   <link rel="stylesheet" href="../css/style.css">
@@ -13,6 +13,7 @@
 <script src="js/search.js"></script>
 
 </head>
+
   <body>
 
     <?php require('connectdb.php'); ?> 
@@ -39,6 +40,7 @@ $sqlQuery = setVars();
     ?>
     <section>
       <div class="card">
+      <a class="oneline title1" href="https://www.localhost/CS4750-dog-shelter/templates/index2.php">Home </a>
         <h1>Welcome to your dog shelter's profile!</h1>
         <hr>
         <?php foreach($sqlQuery as $items): ?>
@@ -163,3 +165,4 @@ $results = give_all_dogs();
       }
       }
     </style>
+    <?php include('containers/footer.php'); ?>

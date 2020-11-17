@@ -7,7 +7,8 @@ include('containers/header.php');
       if (!isset($_SESSION['loggedin'])) {
         header('Location: http://www.localhost/CS4750-dog-shelter/templates/login.php');
         exit;
-      } 
+	  } 
+	  
 	?>
 	<div role="navigation" class="navbar navbar-default navbar-static-top">
       <div class="container">
@@ -18,7 +19,7 @@ include('containers/header.php');
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="#" class="navbar-brand">Dog Shelter</a>
+          <a href="#" class="navbar-brand">The Dog Network DS</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -40,7 +41,7 @@ include('containers/header.php');
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/css/bootstrap-slider.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.min.js"></script>
 <script src="js/search.js"></script>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="../css/style.css">
 
 <div class="container">		
 	<h2>Available Dogs</h2>
@@ -108,7 +109,7 @@ include('containers/header.php');
 </div>	
 
 
-
+<?php include('containers/footer.php');?>
 
 
 

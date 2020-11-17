@@ -2,7 +2,7 @@
 // session_start();
 include('containers/header.php');
 ?>
-<title>Dog Shelter Database</title>
+<title>The Dog Network</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/css/bootstrap-slider.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.min.js"></script>
 <script src="js/search.js"></script>
@@ -26,11 +26,11 @@ include('containers/header.php');
 			</div>			
 		</div>    
 		<div class="list-group">
-			<!-- <h3>Breed</h3> -->
-			<!-- <div class="breedSection">
+			<!-- <h3>Breed</h3> 
+			 <div class="breedSection">
 				<?php
-				//$dog_breed = $dog->getBreed();
-				//foreach($dog_breed as $breedDetails){	
+				// $dog_breed = $dog->getBreed();
+				// foreach($dog_breed as $breedDetails){	
 				?>
 				<div class="list-group-item checkbox">
 				<label><input type="checkbox" class="dogDetail dog_breed" value="<?php echo $breedDetails["dog_breed"]; ?>"  > <?php echo $breedDetails["dog_breed"]; ?></label>

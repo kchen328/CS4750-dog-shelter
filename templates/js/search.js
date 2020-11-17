@@ -17,14 +17,14 @@ function filterSearch() {
 	var action = 'fetch_data';
 	var minPrice = $('#minPrice').val();
 	var maxPrice = $('#maxPrice').val();
-	var Dog_breed = getFilterData('Dog_breed');
+	var dog_breed = getFilterData('dog_breed');
 	var color = getFilterData('color');
 	var dog_size = getFilterData('dog_size');
 	$.ajax({
 		url:"action.php",
 		method:"POST",
 		dataType: "json",		
-		data:{action:action, minPrice:	minPrice, maxPrice:maxPrice, Dog_breed:Dog_breed, color:color, dog_size:dog_size},
+		data:{action:action, minPrice:	minPrice, maxPrice:maxPrice, dog_breed:dog_breed, color:color, dog_size:dog_size},
 		success:function(data){
 			$('.searchResult').html(data.html);
 		}

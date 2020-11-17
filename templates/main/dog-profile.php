@@ -2,7 +2,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>Dog_Who</title>
+  <title>The Dog Network</title>
   <link rel="stylesheet" type="text/css" href="../../css/main.css">   
   <link rel="stylesheet" type="text/css" href="../../css/style.css">  
 

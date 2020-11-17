@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>Dog_Who</title>
+  <title>The Dog Network</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> 
   <link rel="stylesheet" type="text/css" href="../css/main.css"> 
 </head>
@@ -37,6 +37,7 @@ $sqlQuery = setVars();
     <section>
     <button name="goback" class="login100-form-btn" onclick="window.location.href ='https://www.localhost/CS4750-dog-shelter/templates/index3.php';" >Go Back</button> <br>
       <div class="card">
+        
         <h1>Welcome to your Adopter's profile!</h1>
         <hr>
         <?php foreach($sqlQuery as $item): ?>
